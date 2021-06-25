@@ -5,6 +5,8 @@
  */
 package com.mycompany.escaleraserpiente.componentesJuego;
 
+import java.awt.Color;
+
 /**
  *
  * @author drymnz

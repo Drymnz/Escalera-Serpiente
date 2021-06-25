@@ -1,5 +1,6 @@
 package com.mycompany.escaleraserpiente;
 
+import ManejadorArchivos.ManejoCarga;
 import com.mycompany.escaleraserpiente.interfas.Ventana;
 
 /*
@@ -16,6 +17,7 @@ public class Start {
     public static final Ventana ejecutar = new Ventana();
 
     public static void main(String[] args) {
+        (new ManejoCarga()).verificarCarpetasNesesarias();
         ejecutar.setSize(400, 620);
         ejecutar.setResizable(false);
         ejecutar.setVisible(true);

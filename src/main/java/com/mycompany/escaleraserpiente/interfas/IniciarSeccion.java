@@ -5,6 +5,8 @@
  */
 package com.mycompany.escaleraserpiente.interfas;
 
+import com.mycompany.escaleraserpiente.Start;
+
 /**
  *
  * @author drymnz
@@ -27,19 +29,42 @@ public class IniciarSeccion extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JButtonMenuPrincipal = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(196, 92, 160));
+
+        JButtonMenuPrincipal.setText("Menu Principal");
+        JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonMenuPrincipalActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JButtonMenuPrincipal)
+                .addContainerGap(276, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JButtonMenuPrincipal)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JButtonMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonMenuPrincipalActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.irMenuPrincipal();
+    }//GEN-LAST:event_JButtonMenuPrincipalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonMenuPrincipal;
     // End of variables declaration//GEN-END:variables
 }

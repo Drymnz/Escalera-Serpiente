@@ -5,19 +5,29 @@
  */
 package com.mycompany.escaleraserpiente.Usuario;
 
+import ManejadorArchivos.ManejoEscrituraLectura;
+import com.mycompany.escaleraserpiente.Start;
+import java.io.File;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author drymnz
  */
-public class Registrar extends javax.swing.JPanel {
+public class Registrar extends javax.swing.JPanel implements Runnable{
+    private int contador;
+    private Usuario[] listado = new Usuario[1];
 
     /**
      * Creates new form Registrar
      */
-    public Registrar() {
+    public Registrar(int contador) {
+        this.contador =  contador;
+        System.out.println("contador>>>>"+contador);
+        listado = new Usuario[contador+1];
         initComponents();
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +37,118 @@ public class Registrar extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        DecirUnoDescripcion = new javax.swing.JLabel();
+        JButtonMenuPrincipal = new javax.swing.JButton();
+        JLabelDecir = new javax.swing.JLabel();
+        JTextFieldNombre = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        JTextFieldApellido = new javax.swing.JTextField();
+        JButtonRegistrar = new javax.swing.JButton();
+
         setBackground(new java.awt.Color(106, 132, 94));
+
+        DecirUnoDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        DecirUnoDescripcion.setText("Este menu es para registrar usurias para el juego");
+
+        JButtonMenuPrincipal.setText("Menu Principal");
+        JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonMenuPrincipalActionPerformed(evt);
+            }
+        });
+
+        JLabelDecir.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        JLabelDecir.setText("Escribar el nombre del usuario :");
+
+        jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
+        jLabel1.setText("Escriba el apellido del usuario :");
+
+        JButtonRegistrar.setText("Registrar");
+        JButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegistrarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JButtonMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DecirUnoDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JLabelDecir)
+                    .addComponent(JTextFieldNombre)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(JTextFieldApellido)
+                    .addComponent(JButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JButtonMenuPrincipal)
+                .addGap(18, 18, 18)
+                .addComponent(DecirUnoDescripcion)
+                .addGap(18, 18, 18)
+                .addComponent(JLabelDecir)
+                .addGap(18, 18, 18)
+                .addComponent(JTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(JTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(JButtonRegistrar)
+                .addContainerGap(311, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JButtonMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonMenuPrincipalActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.irMenuPrincipal();
+    }//GEN-LAST:event_JButtonMenuPrincipalActionPerformed
+
+    private void JButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegistrarActionPerformed
+        // TODO add your handling code here:
+        if ( (JTextFieldNombre.getText().trim().equals("")) && ((JTextFieldApellido.getText().trim().equals("")))) {
+            String indicar = ((JTextFieldNombre.getText().trim().equals("")))? " nombre ": " apellido " ;
+            JOptionPane.showMessageDialog(null, "Por favor rellene "+indicar);
+        } else {
+            agregarUsuario(JTextFieldNombre.getText(), JTextFieldApellido.getText());
+            JOptionPane.showMessageDialog(null, "Fue registrado el usario con existo");
+            JTextFieldNombre.setText("");
+            JTextFieldApellido.setText("");
+        }
+    }//GEN-LAST:event_JButtonRegistrarActionPerformed
+    private void agregarUsuario(String nombre, String apellido){
+        Usuario agregar = new Usuario(contador, nombre, apellido);
+        listado[contador] = agregar;
+        contador ++;
+        (new Thread(this)).start();
+        (new ManejoEscrituraLectura()).escribirArchivo(agregar, new File(".Archivo/Usuario/"+contador+".usuario"));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel DecirUnoDescripcion;
+    private javax.swing.JButton JButtonMenuPrincipal;
+    private javax.swing.JButton JButtonRegistrar;
+    private javax.swing.JLabel JLabelDecir;
+    private javax.swing.JTextField JTextFieldApellido;
+    private javax.swing.JTextField JTextFieldNombre;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        Usuario[] nuevo = new Usuario[listado.length +1];
+        for (int i = 0; i < contador; i++) {
+            nuevo[i] = listado[i];
+        }
+        listado = null;
+        listado = nuevo;
+    }
 }

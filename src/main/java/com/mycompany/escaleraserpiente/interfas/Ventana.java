@@ -5,8 +5,11 @@
  */
 package com.mycompany.escaleraserpiente.interfas;
 
+import ManejadorArchivos.ManejoCarga;
+import com.mycompany.escaleraserpiente.Usuario.MenuReporte;
 import com.mycompany.escaleraserpiente.Usuario.Registrar;
 import java.awt.CardLayout;
+import java.io.File;
 import javax.swing.SwingUtilities;
 
 /**
@@ -20,7 +23,8 @@ public class Ventana extends javax.swing.JFrame {
     private MenuPrincipal menuPrincipal = new MenuPrincipal();
     private MenuJuego   menuJuegar = new MenuJuego(); 
     private IniciarSeccion cargarPartida = new IniciarSeccion();
-    private Registrar RegistrarUsuario = new Registrar();
+    private Registrar RegistrarUsuario = new Registrar((new ManejoCarga()).contadorArchivo(new File(".Archivo/Usuario"),".usuariio"));
+    private MenuReporte menuRerpote = new MenuReporte();
     //fin  instancias de las sub menus
     /**
      * Creates new form Ventana
@@ -36,6 +40,12 @@ public class Ventana extends javax.swing.JFrame {
        JPanelBase.add(menuJuegar,"Jugar");
        JPanelBase.add(cargarPartida,"CargarPartidad");
        JPanelBase.add(RegistrarUsuario,"RegistrarUsuario");
+       JPanelBase.add(menuRerpote,"Reportes");
+    }
+    public void irMenuPrincipal(){
+        carpeta.show(JPanelBase, "MenuPrincipal");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
     }
     public void subIniciarJuego(){
         carpeta.show(JPanelBase, "Jugar");
@@ -73,6 +83,7 @@ public class Ventana extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Juego Serpiente y Escalera\n");
+        setSize(new java.awt.Dimension(400, 620));
 
         JPanelBase.setLayout(new java.awt.CardLayout());
 

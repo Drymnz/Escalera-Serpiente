@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.escaleraserpiente.interfas;
+package com.mycompany.escaleraserpiente.Usuario;
 
 import com.mycompany.escaleraserpiente.Start;
 
@@ -11,12 +11,12 @@ import com.mycompany.escaleraserpiente.Start;
  *
  * @author drymnz
  */
-public class MenuJuego extends javax.swing.JPanel {
+public class MenuReporte extends javax.swing.JPanel {
 
     /**
-     * Creates new form MenuJuego
+     * Creates new form MenuReportes
      */
-    public MenuJuego() {
+    public MenuReporte() {
         initComponents();
     }
 
@@ -29,14 +29,14 @@ public class MenuJuego extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JButtonMenuPrincipal = new javax.swing.JButton();
+        JButtonMenuPrincial = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(72, 210, 217));
+        setBackground(new java.awt.Color(160, 111, 111));
 
-        JButtonMenuPrincipal.setText("Menu Principal");
-        JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+        JButtonMenuPrincial.setText("Menu Princial");
+        JButtonMenuPrincial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JButtonMenuPrincipalActionPerformed(evt);
+                JButtonMenuPrincialActionPerformed(evt);
             }
         });
 
@@ -46,25 +46,25 @@ public class MenuJuego extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JButtonMenuPrincipal)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addComponent(JButtonMenuPrincial)
+                .addContainerGap(285, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JButtonMenuPrincipal)
+                .addComponent(JButtonMenuPrincial)
                 .addContainerGap(260, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void JButtonMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonMenuPrincipalActionPerformed
+    private void JButtonMenuPrincialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonMenuPrincialActionPerformed
         // TODO add your handling code here:
         Start.ejecutar.irMenuPrincipal();
-    }//GEN-LAST:event_JButtonMenuPrincipalActionPerformed
+    }//GEN-LAST:event_JButtonMenuPrincialActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton JButtonMenuPrincipal;
+    private javax.swing.JButton JButtonMenuPrincial;
     // End of variables declaration//GEN-END:variables
 }

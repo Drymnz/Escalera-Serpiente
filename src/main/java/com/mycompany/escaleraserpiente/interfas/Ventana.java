@@ -14,30 +14,51 @@ import javax.swing.SwingUtilities;
  * @author drymnz
  */
 public class Ventana extends javax.swing.JFrame {
-    private CardLayout carpeta;
-    
-    private MenuPrincipal menuPrincipal = new MenuPrincipal();
-    private Registrar registrar = new Registrar();
 
+    private CardLayout carpeta;
+    // instancias de las sub menus
+    private MenuPrincipal menuPrincipal = new MenuPrincipal();
+    private MenuJuego   menuJuegar = new MenuJuego(); 
+    private IniciarSeccion cargarPartida = new IniciarSeccion();
+    private Registrar RegistrarUsuario = new Registrar();
+    //fin  instancias de las sub menus
     /**
      * Creates new form Ventana
      */
     public Ventana() {
         initComponents();
         subVentanas();
-        
     }
+    // para el uso de los botones, metodos para cambiar de ventana
     private void subVentanas(){
        carpeta = (CardLayout) JPanelBase.getLayout();
        JPanelBase.add(menuPrincipal, "MenuPrincipal");
-       JPanelBase.add(registrar,"Registrar");
+       JPanelBase.add(menuJuegar,"Jugar");
+       JPanelBase.add(cargarPartida,"CargarPartidad");
+       JPanelBase.add(RegistrarUsuario,"RegistrarUsuario");
     }
-   
-    public void subMenuRegistrar(){
-        carpeta.show(JPanelBase, "Avion");
+    public void subIniciarJuego(){
+        carpeta.show(JPanelBase, "Jugar");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
     }
+    public void subIniciarSeccion(){
+        carpeta.show(JPanelBase, "CargarPartidad");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }
+    public void subMenuRegistrar(){
+        carpeta.show(JPanelBase, "RegistrarUsuario");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }
+    
+    public void subMenuReportes(){
+        carpeta.show(JPanelBase, "Reportes");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }
+    //fin metodos para cambiar de ventana
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -74,6 +74,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Jugar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonJugarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="JLabelLogo">
       <Properties>
@@ -87,6 +90,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Cargar Partica"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonCargarParticaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonRegistrarUsuario">
       <Properties>
@@ -95,6 +101,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Registrar Usuario"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonRegistrarUsuarioActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonReportes">
       <Properties>
@@ -103,6 +112,9 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Reportes"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonReportesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonSalir">
       <Properties>

@@ -5,6 +5,8 @@
  */
 package com.mycompany.escaleraserpiente.interfas;
 
+import com.mycompany.escaleraserpiente.Start;
+
 /**
  *
  * @author drymnz
@@ -39,17 +41,37 @@ public class MenuPrincipal extends javax.swing.JPanel {
         JButtonJugar.setBackground(java.awt.Color.gray);
         JButtonJugar.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonJugar.setText("Jugar");
+        JButtonJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonJugarActionPerformed(evt);
+            }
+        });
 
         JLabelLogo.setText("Juego serpiente y escalera");
 
         JButtonCargarPartica.setBackground(java.awt.Color.gray);
         JButtonCargarPartica.setText("Cargar Partica");
+        JButtonCargarPartica.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonCargarParticaActionPerformed(evt);
+            }
+        });
 
         JButtonRegistrarUsuario.setBackground(java.awt.Color.gray);
         JButtonRegistrarUsuario.setText("Registrar Usuario");
+        JButtonRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonRegistrarUsuarioActionPerformed(evt);
+            }
+        });
 
         JButtonReportes.setBackground(java.awt.Color.gray);
         JButtonReportes.setText("Reportes");
+        JButtonReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonReportesActionPerformed(evt);
+            }
+        });
 
         JButtonSalir.setBackground(java.awt.Color.gray);
         JButtonSalir.setText("Salir");
@@ -102,6 +124,26 @@ public class MenuPrincipal extends javax.swing.JPanel {
         // TODO add your handling code here:
          System.exit(0);
     }//GEN-LAST:event_JButtonSalirActionPerformed
+
+    private void JButtonRegistrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegistrarUsuarioActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.subMenuRegistrar();
+    }//GEN-LAST:event_JButtonRegistrarUsuarioActionPerformed
+
+    private void JButtonReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonReportesActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.subMenuReportes();
+    }//GEN-LAST:event_JButtonReportesActionPerformed
+
+    private void JButtonCargarParticaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonCargarParticaActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.subIniciarSeccion();
+    }//GEN-LAST:event_JButtonCargarParticaActionPerformed
+
+    private void JButtonJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonJugarActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.subIniciarJuego();
+    }//GEN-LAST:event_JButtonJugarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

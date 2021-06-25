@@ -64,7 +64,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Ubuntu" size="18" style="0"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Este menu es para registrar usurias para el juego"/>
+        <Property name="text" type="java.lang.String" value="Para registrar a usuarios"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonMenuPrincipal">

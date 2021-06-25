@@ -14,20 +14,18 @@ import javax.swing.JOptionPane;
  *
  * @author drymnz
  */
-public class Registrar extends javax.swing.JPanel implements Runnable{
+public class Registrar extends javax.swing.JPanel {
+
     private int contador;
-    private Usuario[] listado = new Usuario[1];
 
     /**
      * Creates new form Registrar
      */
     public Registrar(int contador) {
-        this.contador =  contador;
-        System.out.println("contador>>>>"+contador);
-        listado = new Usuario[contador+1];
+        this.contador = contador;
         initComponents();
     }
-  
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,7 +46,7 @@ public class Registrar extends javax.swing.JPanel implements Runnable{
         setBackground(new java.awt.Color(106, 132, 94));
 
         DecirUnoDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
-        DecirUnoDescripcion.setText("Este menu es para registrar usurias para el juego");
+        DecirUnoDescripcion.setText("Para registrar a usuarios");
 
         JButtonMenuPrincipal.setText("Menu Principal");
         JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
@@ -114,9 +112,9 @@ public class Registrar extends javax.swing.JPanel implements Runnable{
 
     private void JButtonRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonRegistrarActionPerformed
         // TODO add your handling code here:
-        if ( (JTextFieldNombre.getText().trim().equals("")) && ((JTextFieldApellido.getText().trim().equals("")))) {
-            String indicar = ((JTextFieldNombre.getText().trim().equals("")))? " nombre ": " apellido " ;
-            JOptionPane.showMessageDialog(null, "Por favor rellene "+indicar);
+        if ((JTextFieldNombre.getText().trim().equals("")) && ((JTextFieldApellido.getText().trim().equals("")))) {
+            String indicar = ((JTextFieldNombre.getText().trim().equals(""))) ? " nombre " : " apellido ";
+            JOptionPane.showMessageDialog(null, "Por favor rellene " + indicar);
         } else {
             agregarUsuario(JTextFieldNombre.getText(), JTextFieldApellido.getText());
             JOptionPane.showMessageDialog(null, "Fue registrado el usario con existo");
@@ -124,12 +122,10 @@ public class Registrar extends javax.swing.JPanel implements Runnable{
             JTextFieldApellido.setText("");
         }
     }//GEN-LAST:event_JButtonRegistrarActionPerformed
-    private void agregarUsuario(String nombre, String apellido){
+    private void agregarUsuario(String nombre, String apellido) {
+        contador++;
         Usuario agregar = new Usuario(contador, nombre, apellido);
-        listado[contador] = agregar;
-        contador ++;
-        (new Thread(this)).start();
-        (new ManejoEscrituraLectura()).escribirArchivo(agregar, new File(".Archivo/Usuario/"+contador+".usuario"));
+        (new ManejoEscrituraLectura()).escribirArchivo(agregar, new File(".Archivo/Usuario/" + contador + ".usuario"));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -142,18 +138,8 @@ public class Registrar extends javax.swing.JPanel implements Runnable{
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void run() {
-        Usuario[] nuevo = new Usuario[listado.length +1];
-        for (int i = 0; i < contador; i++) {
-            nuevo[i] = listado[i];
-        }
-        listado = null;
-        listado = nuevo;
-    }
-
     public int getContador() {
         return contador;
     }
-    
+
 }

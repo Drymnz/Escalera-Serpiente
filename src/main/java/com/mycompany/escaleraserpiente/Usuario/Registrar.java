@@ -151,4 +151,9 @@ public class Registrar extends javax.swing.JPanel implements Runnable{
         listado = null;
         listado = nuevo;
     }
+
+    public int getContador() {
+        return contador;
+    }
+    
 }

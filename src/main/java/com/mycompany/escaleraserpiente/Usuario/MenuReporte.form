@@ -24,7 +24,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="JButtonMenuPrincial" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="285" max="32767" attributes="0"/>
+              <EmptySpace pref="173" max="32767" attributes="0"/>
+              <Component id="JButtonActualizar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -32,7 +34,10 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="JButtonMenuPrincial" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="JButtonMenuPrincial" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="JButtonActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace pref="260" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -46,6 +51,11 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonMenuPrincialActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="JButtonActualizar">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Actualizar"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

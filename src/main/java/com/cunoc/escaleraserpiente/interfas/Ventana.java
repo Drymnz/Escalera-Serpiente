@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.escaleraserpiente.interfas;
+package com.cunoc.escaleraserpiente.interfas;
 
-import ManejadorArchivos.ManejoCarga;
-import com.mycompany.escaleraserpiente.Usuario.MenuReporte;
-import com.mycompany.escaleraserpiente.Usuario.Registrar;
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoCarga;
+import com.cunoc.escaleraserpiente.Usuario.MenuReporte;
+import com.cunoc.escaleraserpiente.Usuario.Registrar;
 import java.awt.CardLayout;
 import java.io.File;
 import javax.swing.SwingUtilities;

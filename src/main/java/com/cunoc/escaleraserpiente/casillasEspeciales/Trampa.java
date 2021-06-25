@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.escaleraserpiente.casillasEspeciales;
+package com.cunoc.escaleraserpiente.casillasEspeciales;
 
 /**
  *
  * @author drymnz
  */
-public class Bono {
+public class Trampa {
     
 }

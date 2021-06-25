@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.escaleraserpiente.interfas;
+package com.cunoc.escaleraserpiente.interfas;
 
 /**
  *
  * @author drymnz
  */
-public class TablaPuntaje extends javax.swing.JPanel {
+public class JuegoSerpienteEscalera extends javax.swing.JPanel {
 
     /**
-     * Creates new form TablaPuntaje
+     * Creates new form JuegoSerpienteEscalera
      */
-    public TablaPuntaje() {
+    public JuegoSerpienteEscalera() {
         initComponents();
     }
 

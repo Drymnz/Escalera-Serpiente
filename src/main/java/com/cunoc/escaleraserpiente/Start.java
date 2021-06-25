@@ -1,7 +1,7 @@
-package com.mycompany.escaleraserpiente;
+package com.cunoc.escaleraserpiente;
 
-import ManejadorArchivos.ManejoCarga;
-import com.mycompany.escaleraserpiente.interfas.Ventana;
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoCarga;
+import com.cunoc.escaleraserpiente.interfas.Ventana;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

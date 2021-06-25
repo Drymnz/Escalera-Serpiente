@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 public class MenuReporte extends javax.swing.JPanel implements Runnable {
 
     private Usuario[] listado;
-    private int contador;
     private DefaultTableModel aparenciaTabla = new DefaultTableModel(){
         // sobre escribir el metodo de aparencia para que no se aditable la tabla para el usuario
         @Override
@@ -35,7 +34,6 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
     }
     // metodos para la aparencia de la tabla
     public void cargarListadoUsuario(int contador) {
-        this.contador = contador;
         listado = new Usuario[contador];
         (new Thread(this)).start();
         cargaraparenciaTabla();
@@ -102,7 +100,7 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(JButtonMenuPrincial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 173, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
                 .addComponent(JButtonActualizar)
                 .addContainerGap())
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
@@ -115,8 +113,7 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
                     .addComponent(JButtonMenuPrincial)
                     .addComponent(JButtonActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -5,7 +5,13 @@
  */
 package com.cunoc.escaleraserpiente.interfas;
 
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
 import com.cunoc.escaleraserpiente.Start;
+import com.cunoc.escaleraserpiente.Usuario.Usuario;
+import java.io.File;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,12 +19,70 @@ import com.cunoc.escaleraserpiente.Start;
  */
 public class MenuJuego extends javax.swing.JPanel {
 
+    private int contadorJugadores = 0;
+    private Usuario[] listadoRegistrado = null;
+    private Usuario[] listadoJugadores = null;
+
     /**
      * Creates new form MenuJuego
      */
     public MenuJuego() {
         initComponents();
     }
+
+    // cargar los usuarios disponibles
+    public void cargarUsuarios(int contador) {
+        listadoRegistrado = new Usuario[contador];
+        listadoJugadores = new Usuario[contador];
+        coloracarUsuarios();
+        actualizarListadoJugadores(JTableJugadores, listadoJugadores);
+        actualizarListadoJugadores(JTableListadoRegistro, listadoRegistrado);
+
+    }
+
+    private void coloracarUsuarios() {
+        DefaultTableModel modificar = (DefaultTableModel) JTableListadoRegistro.getModel();
+        for (int i = 0; i < listadoRegistrado.length; i++) {
+            Object obtener = (new ManejoEscrituraLectura()).lecturarArchivoBinario(new File(".Archivo/Usuario/" + (i + 1) + ".usuario"));
+            listadoRegistrado[i] = (Usuario) (obtener);
+            if (listadoRegistrado[i] != null) {
+                modificar.addRow(new Object[]{listadoRegistrado[i].getId(), listadoRegistrado[i].getNombre(), listadoRegistrado[i].getApellido()});
+            }
+        }
+    }
+
+    private void actualizarListadoJugadores(JTable limpiar, Usuario[] listado) {
+        DefaultTableModel modificar = (DefaultTableModel) limpiar.getModel();
+        int filas = modificar.getRowCount();
+        for (int i = (filas - 1); i >= 0; i--) {
+            modificar.removeRow(i);
+        }
+        for (int i = 0; i < listado.length; i++) {
+            if (listado != null && listado[i] != null) {
+                modificar.addRow(new Object[]{listado[i].getId(), listado[i].getNombre(), listado[i].getApellido()});
+            }
+        }
+    }
+
+    private void agregar(Usuario[] mover, Usuario agregar) {
+        for (int i = 0; i < mover.length; i++) {
+            if (mover[i] == null) {
+                mover[i] = agregar;
+                i = mover.length;
+            }
+        }
+    }
+
+    //fin cargar los usuarios disponibles
+    // aplicando recosivili
+    private void moverAtras(Usuario[] mover, int indice) {
+        if (indice != mover.length - 1 && mover[indice] == null) {
+            mover[indice] = mover[indice + 1];
+            mover[indice + 1] = null;
+            moverAtras(mover, indice + 1);
+        }
+    }
+    // fin de recosivi
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,6 +94,16 @@ public class MenuJuego extends javax.swing.JPanel {
     private void initComponents() {
 
         JButtonMenuPrincipal = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTableListadoRegistro = new javax.swing.JTable();
+        JButtonAgregarJugador = new javax.swing.JButton();
+        JButtonEliminarJugador = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        JTableJugadores = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        JButtonIniciar = new javax.swing.JButton();
+        JButtonListadoJugadores = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(72, 210, 217));
 
@@ -40,21 +114,121 @@ public class MenuJuego extends javax.swing.JPanel {
             }
         });
 
+        JTableListadoRegistro.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Apellido"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(JTableListadoRegistro);
+
+        JButtonAgregarJugador.setText("Agregar Jugador");
+        JButtonAgregarJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonAgregarJugadorActionPerformed(evt);
+            }
+        });
+
+        JButtonEliminarJugador.setText("Eliminar Jugador");
+        JButtonEliminarJugador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonEliminarJugadorActionPerformed(evt);
+            }
+        });
+
+        JTableJugadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Nombre", "Apellido"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(JTableJugadores);
+
+        jLabel1.setText("Jugadores registrados");
+
+        jLabel2.setText("Los que va a jugar");
+
+        JButtonIniciar.setText("Iniciar");
+        JButtonIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonIniciarActionPerformed(evt);
+            }
+        });
+
+        JButtonListadoJugadores.setText("Actualizar listado jugadores");
+        JButtonListadoJugadores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonListadoJugadoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JButtonMenuPrincipal)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(JButtonAgregarJugador)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JButtonEliminarJugador))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(JButtonMenuPrincipal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(JButtonListadoJugadores)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JButtonMenuPrincipal)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButtonMenuPrincipal)
+                    .addComponent(JButtonListadoJugadores))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(JButtonAgregarJugador)
+                    .addComponent(JButtonEliminarJugador))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JButtonIniciar)
+                .addContainerGap(47, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -63,8 +237,67 @@ public class MenuJuego extends javax.swing.JPanel {
         Start.ejecutar.irMenuPrincipal();
     }//GEN-LAST:event_JButtonMenuPrincipalActionPerformed
 
+    private void JButtonAgregarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonAgregarJugadorActionPerformed
+        // TODO add your handling code here:
+        int fila = JTableListadoRegistro.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE USARIOS ");
+        } else {
+            agregar(listadoJugadores, listadoRegistrado[fila]);
+            listadoRegistrado[fila] = null;
+            moverAtras(listadoRegistrado, fila);
+            contadorJugadores++;
+            actualizarListadoJugadores(JTableJugadores, listadoJugadores);
+            actualizarListadoJugadores(JTableListadoRegistro, listadoRegistrado);
+        }
+    }//GEN-LAST:event_JButtonAgregarJugadorActionPerformed
+
+    private void JButtonEliminarJugadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonEliminarJugadorActionPerformed
+        // TODO add your handling code here:
+        int fila = JTableJugadores.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");
+        } else {
+            agregar(listadoRegistrado, listadoJugadores[fila]);
+            listadoJugadores[fila] = null;
+            moverAtras(listadoJugadores, fila);
+            contadorJugadores--;
+            actualizarListadoJugadores(JTableJugadores, listadoJugadores);
+            actualizarListadoJugadores(JTableListadoRegistro, listadoRegistrado);
+        }
+    }//GEN-LAST:event_JButtonEliminarJugadorActionPerformed
+
+    private void JButtonListadoJugadoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonListadoJugadoresActionPerformed
+        // TODO add your handling code here:
+        actualizarListadoJugadores(JTableJugadores, listadoJugadores);
+        actualizarListadoJugadores(JTableListadoRegistro, listadoRegistrado);
+    }//GEN-LAST:event_JButtonListadoJugadoresActionPerformed
+
+    private void JButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonIniciarActionPerformed
+        // TODO add your handling code here:
+        if (contadorJugadores > 1) {
+            /*/ si puede juegar
+            iniciar el juego
+            mandar el listado listadoJugadores para que cuente cuantos jugadores y quienes jugaran
+             */
+            Start.ejecutar.jugar();
+        } else {
+            JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");
+        }
+    }//GEN-LAST:event_JButtonIniciarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonAgregarJugador;
+    private javax.swing.JButton JButtonEliminarJugador;
+    private javax.swing.JButton JButtonIniciar;
+    private javax.swing.JButton JButtonListadoJugadores;
     private javax.swing.JButton JButtonMenuPrincipal;
+    private javax.swing.JTable JTableJugadores;
+    private javax.swing.JTable JTableListadoRegistro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,7 @@ package com.cunoc.escaleraserpiente.interfas;
 import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoCarga;
 import com.cunoc.escaleraserpiente.Usuario.MenuReporte;
 import com.cunoc.escaleraserpiente.Usuario.Registrar;
+import com.cunoc.escaleraserpiente.componentesJuego.PantallaDelJuego;
 import java.awt.CardLayout;
 import java.io.File;
 import javax.swing.SwingUtilities;
@@ -25,14 +26,14 @@ public class Ventana extends javax.swing.JFrame {
     private IniciarSeccion cargarPartida = new IniciarSeccion();
     private Registrar RegistrarUsuario;
     private MenuReporte menuRerpote = new MenuReporte();
+    private PantallaDelJuego juego = new PantallaDelJuego();
 
     //fin  instancias de las sub menus
     /**
      * Creates new form Ventana
      */
     public Ventana() {
-        int cantidadUsuarios = (new ManejoCarga()).contadorArchivo(new File(".Archivo/Usuario"), ".usuario");
-        RegistrarUsuario = new Registrar(cantidadUsuarios);
+        RegistrarUsuario = new Registrar((new ManejoCarga()).contadorArchivo(new File(".Archivo/Usuario"), ".usuario"));
         initComponents();
         subVentanas();
     }
@@ -41,20 +42,23 @@ public class Ventana extends javax.swing.JFrame {
     private void subVentanas() {
         carpeta = (CardLayout) JPanelBase.getLayout();
         JPanelBase.add(menuPrincipal, "MenuPrincipal");
-        JPanelBase.add(menuJuegar, "Jugar");
+        JPanelBase.add(menuJuegar, "subIniciarJuego");
         JPanelBase.add(cargarPartida, "CargarPartidad");
         JPanelBase.add(RegistrarUsuario, "RegistrarUsuario");
         JPanelBase.add(menuRerpote, "Reportes");
+        JPanelBase.add(juego, "Jugar");
     }
 
     public void irMenuPrincipal() {
+        this.setSize(400, 620);
         carpeta.show(JPanelBase, "MenuPrincipal");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
     }
 
     public void subIniciarJuego() {
-        carpeta.show(JPanelBase, "Jugar");
+        menuJuegar.cargarUsuarios(RegistrarUsuario.getContador());
+        carpeta.show(JPanelBase, "subIniciarJuego");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
     }
@@ -79,6 +83,14 @@ public class Ventana extends javax.swing.JFrame {
         this.repaint();
     }
     //fin metodos para cambiar de ventana
+    // para iniciar le juego
+    public void jugar() {
+        this.setSize(1280, 720);
+        carpeta.show(JPanelBase, "Jugar");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
+    }
+    // fin juego
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

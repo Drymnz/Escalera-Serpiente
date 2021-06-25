@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package componentesJuego;
+package com.mycompany.escaleraserpiente.casillasEspeciales;
 
 /**
  *
  * @author drymnz
  */
-public class ReglaJuegoSS {
+public class Bono {
     
 }

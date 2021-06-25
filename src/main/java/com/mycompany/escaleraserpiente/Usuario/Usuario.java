@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package casillasEspeciales;
+package com.mycompany.escaleraserpiente.Usuario;
 
 /**
  *
  * @author drymnz
  */
-public class Bono {
+public class Usuario {
     
 }

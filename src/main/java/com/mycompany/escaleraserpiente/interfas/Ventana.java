@@ -5,17 +5,38 @@
  */
 package com.mycompany.escaleraserpiente.interfas;
 
+import com.mycompany.escaleraserpiente.Usuario.Registrar;
+import java.awt.CardLayout;
+import javax.swing.SwingUtilities;
+
 /**
  *
  * @author drymnz
  */
 public class Ventana extends javax.swing.JFrame {
+    private CardLayout carpeta;
+    
+    private MenuPrincipal menuPrincipal = new MenuPrincipal();
+    private Registrar registrar = new Registrar();
 
     /**
      * Creates new form Ventana
      */
     public Ventana() {
         initComponents();
+        subVentanas();
+        
+    }
+    private void subVentanas(){
+       carpeta = (CardLayout) JPanelBase.getLayout();
+       JPanelBase.add(menuPrincipal, "MenuPrincipal");
+       JPanelBase.add(registrar,"Registrar");
+    }
+   
+    public void subMenuRegistrar(){
+        carpeta.show(JPanelBase, "Avion");
+        SwingUtilities.updateComponentTreeUI(this);
+        this.repaint();
     }
 
     /**
@@ -27,17 +48,22 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JPanelBase = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Juego Serpiente y Escalera\n");
+
+        JPanelBase.setLayout(new java.awt.CardLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(JPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(JPanelBase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -49,5 +75,6 @@ public class Ventana extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel JPanelBase;
     // End of variables declaration//GEN-END:variables
 }

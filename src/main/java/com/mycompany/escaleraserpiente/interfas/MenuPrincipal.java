@@ -27,19 +27,89 @@ public class MenuPrincipal extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        JButtonJugar = new javax.swing.JButton();
+        JLabelLogo = new javax.swing.JLabel();
+        JButtonCargarPartica = new javax.swing.JButton();
+        JButtonRegistrarUsuario = new javax.swing.JButton();
+        JButtonReportes = new javax.swing.JButton();
+        JButtonSalir = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(45, 214, 233));
+
+        JButtonJugar.setBackground(java.awt.Color.gray);
+        JButtonJugar.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        JButtonJugar.setText("Jugar");
+
+        JLabelLogo.setText("Juego serpiente y escalera");
+
+        JButtonCargarPartica.setBackground(java.awt.Color.gray);
+        JButtonCargarPartica.setText("Cargar Partica");
+
+        JButtonRegistrarUsuario.setBackground(java.awt.Color.gray);
+        JButtonRegistrarUsuario.setText("Registrar Usuario");
+
+        JButtonReportes.setBackground(java.awt.Color.gray);
+        JButtonReportes.setText("Reportes");
+
+        JButtonSalir.setBackground(java.awt.Color.gray);
+        JButtonSalir.setText("Salir");
+        JButtonSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonSalirActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(JLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(JButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JButtonCargarPartica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JButtonRegistrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(JButtonReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 96, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
+                .addComponent(JButtonJugar)
+                .addGap(18, 18, 18)
+                .addComponent(JButtonCargarPartica)
+                .addGap(18, 18, 18)
+                .addComponent(JButtonRegistrarUsuario)
+                .addGap(18, 18, 18)
+                .addComponent(JButtonReportes)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JButtonSalir)
+                .addContainerGap(189, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JButtonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonSalirActionPerformed
+        // TODO add your handling code here:
+         System.exit(0);
+    }//GEN-LAST:event_JButtonSalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JButtonCargarPartica;
+    private javax.swing.JButton JButtonJugar;
+    private javax.swing.JButton JButtonRegistrarUsuario;
+    private javax.swing.JButton JButtonReportes;
+    private javax.swing.JButton JButtonSalir;
+    private javax.swing.JLabel JLabelLogo;
     // End of variables declaration//GEN-END:variables
 }

@@ -10,5 +10,12 @@ package com.mycompany.escaleraserpiente.componentesJuego;
  * @author drymnz
  */
 public class Tablero {
-    
+    private int fila;
+    private int columna;
+    private Casilla [][] casillas = new Casilla [fila][columna];
+    // constructores
+    public Tablero(){
+        
+    }
+    //fin constructores
 }

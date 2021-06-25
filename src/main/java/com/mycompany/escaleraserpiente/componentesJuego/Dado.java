@@ -10,5 +10,14 @@ package com.mycompany.escaleraserpiente.componentesJuego;
  * @author drymnz
  */
 public class Dado {
-    
+   private int numero;
+   // constructor
+    public Dado(int numero) {
+        this.numero = numero;
+    }
+    public Dado(){
+        this(0);
+    }
+    //fin constructor
+  
 }

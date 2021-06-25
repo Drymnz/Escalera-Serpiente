@@ -9,6 +9,17 @@ package com.mycompany.escaleraserpiente.componentesJuego;
  *
  * @author drymnz
  */
-public class Casilla {
-    
+public abstract class Casilla {
+    private int id;
+    private Ficha ficha;
+    // constructor
+    public Casilla(int id,Ficha ficha){
+        this.id = id;
+        this.ficha = ficha;
+    }
+    public Casilla(int id){
+        this(id, null);
+    }
+    // fin constructor
+    public abstract void cambiarColor();
 }

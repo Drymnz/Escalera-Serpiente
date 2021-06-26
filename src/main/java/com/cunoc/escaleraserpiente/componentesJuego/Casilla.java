@@ -5,11 +5,14 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import java.awt.Graphics;
+import javax.swing.JPanel;
+
 /**
  *
  * @author drymnz
  */
-public abstract class Casilla {
+public  class Casilla extends JPanel{
     private int id;
     private Ficha ficha;
     // constructor
@@ -21,5 +24,9 @@ public abstract class Casilla {
         this(id, null);
     }
     // fin constructor
-    public abstract void cambiarColor();
+    // que cambie de color
+    //public abstract void cambiarColor();
+    public void pintar(Graphics G) {
+        G.fillRect(0, 0, 10, 10);
+    }
 }

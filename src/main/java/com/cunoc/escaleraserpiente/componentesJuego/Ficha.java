@@ -6,16 +6,18 @@
 package com.cunoc.escaleraserpiente.componentesJuego;
 
 import java.awt.Color;
+import java.awt.Graphics;
 
 /**
  *
  * @author drymnz
  */
-public class Ficha {
+public class Ficha{
     private Color color;
     // usar lo que usaste para el nodo que ivas a usar para crear asiento de avion
     public Ficha(Color color){
         this.color = color;
     }
+    
 
 }

@@ -5,6 +5,7 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
@@ -12,21 +13,56 @@ import javax.swing.JPanel;
  *
  * @author drymnz
  */
-public  class Casilla extends JPanel{
+public class Casilla extends JPanel {
+
     private int id;
     private Ficha ficha;
+    private Color color;
+
     // constructor
-    public Casilla(int id,Ficha ficha){
+    public Casilla(int id, Ficha ficha, Color color) {
         this.id = id;
         this.ficha = ficha;
+        this.color = color;
+        this.setBackground(color);
     }
-    public Casilla(int id){
-        this(id, null);
+
+    public Casilla(int id, Color color) {
+        this(id, null, color);
     }
+
     // fin constructor
-    // que cambie de color
-    //public abstract void cambiarColor();
-    public void pintar(Graphics G) {
-        G.fillRect(0, 0, 10, 10);
+    @Override
+    public void paint(Graphics g) {
+        super.paint(g); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        g.setColor(Color.BLACK);
+        g.drawRect(0, 0, this.getWidth(), this.getHeight());
+        if (ficha != null) {
+            g.setColor(ficha.getColor());
+            g.fillOval(0, 0, this.getWidth(), this.getHeight());
+            g.setColor(Color.BLACK);
+            g.drawString(ficha.getUsuario().getNombre(), this.getWidth() / 2, this.getHeight() / 2);
+        } else {
+            g.setColor(Color.BLACK);
+            g.drawString(id + "", this.getWidth() / 2, this.getHeight() / 2);
+        }
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public Ficha getFicha() {
+        return ficha;
+    }
+
+    public void setFicha(Ficha ficha) {
+        this.ficha = ficha;
+    }
+
 }

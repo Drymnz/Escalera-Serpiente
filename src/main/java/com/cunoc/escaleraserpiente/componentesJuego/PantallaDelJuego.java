@@ -5,6 +5,8 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author drymnz
@@ -14,9 +16,9 @@ public class PantallaDelJuego extends javax.swing.JPanel {
     /**
      * Creates new form PantallaDelJuego
      */
-    public PantallaDelJuego() {
+    public PantallaDelJuego(int fila, int columna) {
         initComponents();
-        tablero1.botones(10,10);
+        tablero1.botones(fila, columna);
     }
 
     /**
@@ -29,28 +31,63 @@ public class PantallaDelJuego extends javax.swing.JPanel {
     private void initComponents() {
 
         tablero1 = new com.cunoc.escaleraserpiente.componentesJuego.Tablero();
-        tablaPuntaje1 = new com.cunoc.escaleraserpiente.componentesJuego.TablaPuntaje();
+        jPanel1 = new javax.swing.JPanel();
+        dado = new com.cunoc.escaleraserpiente.componentesJuego.Dado();
+        JButtonLanzar = new javax.swing.JButton();
 
         javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
         tablero1.setLayout(tablero1Layout);
         tablero1Layout.setHorizontalGroup(
             tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGap(0, 1002, Short.MAX_VALUE)
         );
         tablero1Layout.setVerticalGroup(
             tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 696, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout tablaPuntaje1Layout = new javax.swing.GroupLayout(tablaPuntaje1);
-        tablaPuntaje1.setLayout(tablaPuntaje1Layout);
-        tablaPuntaje1Layout.setHorizontalGroup(
-            tablaPuntaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 144, Short.MAX_VALUE)
+        jPanel1.setBackground(new java.awt.Color(177, 193, 118));
+
+        javax.swing.GroupLayout dadoLayout = new javax.swing.GroupLayout(dado);
+        dado.setLayout(dadoLayout);
+        dadoLayout.setHorizontalGroup(
+            dadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
-        tablaPuntaje1Layout.setVerticalGroup(
-            tablaPuntaje1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 409, Short.MAX_VALUE)
+        dadoLayout.setVerticalGroup(
+            dadoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        JButtonLanzar.setText("Lanzar");
+        JButtonLanzar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JButtonLanzarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(JButtonLanzar)
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(JButtonLanzar)
+                        .addGap(40, 40, 40))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -61,23 +98,34 @@ public class PantallaDelJuego extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(tablaPuntaje1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tablaPuntaje1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void JButtonLanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonLanzarActionPerformed
+        // TODO add your handling code here:
+        if (dado.isDisponible()) {
+            new Thread(dado).start();
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor espere que acabe el dado");
+        }
+    }//GEN-LAST:event_JButtonLanzarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.cunoc.escaleraserpiente.componentesJuego.TablaPuntaje tablaPuntaje1;
+    private javax.swing.JButton JButtonLanzar;
+    private com.cunoc.escaleraserpiente.componentesJuego.Dado dado;
+    private javax.swing.JPanel jPanel1;
     private com.cunoc.escaleraserpiente.componentesJuego.Tablero tablero1;
     // End of variables declaration//GEN-END:variables
 }

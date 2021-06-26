@@ -26,7 +26,7 @@ public class Ventana extends javax.swing.JFrame {
     private IniciarSeccion cargarPartida = new IniciarSeccion();
     private Registrar RegistrarUsuario;
     private MenuReporte menuRerpote = new MenuReporte();
-    private PantallaDelJuego juego = new PantallaDelJuego();
+    private PantallaDelJuego juego = new PantallaDelJuego(0,0);
 
     //fin  instancias de las sub menus
     /**

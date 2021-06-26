@@ -5,19 +5,49 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import java.awt.Color;
-import java.awt.Graphics;
 
 /**
  *
  * @author drymnz
  */
-public class Ficha{
+public class Ficha {
+
     private Color color;
-    // usar lo que usaste para el nodo que ivas a usar para crear asiento de avion
-    public Ficha(Color color){
+    private Usuario usuario;
+    private Casilla ubicacion;
+    
+    // constructor
+    public Ficha(Color color, Usuario usuario,Casilla ubicacion) {
+        this.color = color;
+        this.usuario = usuario;
+        this.ubicacion = ubicacion;
+    }
+    // fin constructor
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
         this.color = color;
     }
-    
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Casilla getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(Casilla ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+    
 }

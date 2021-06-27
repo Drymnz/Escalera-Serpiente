@@ -30,6 +30,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         tablero1.botones(fila, columna);
         jugadores(listado);
         turnoAcutal.setDado(dado);
+        new Thread(cronometro1).start();
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -104,6 +105,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         JTableLIstadoJugadores = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        cronometro1 = new com.cunoc.escaleraserpiente.Cronometro.Cronometro();
 
         javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
         tablero1.setLayout(tablero1Layout);
@@ -169,6 +171,17 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
 
         jLabel2.setText("Este es el dado :");
 
+        javax.swing.GroupLayout cronometro1Layout = new javax.swing.GroupLayout(cronometro1);
+        cronometro1.setLayout(cronometro1Layout);
+        cronometro1Layout.setHorizontalGroup(
+            cronometro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        cronometro1Layout.setVerticalGroup(
+            cronometro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 64, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -186,13 +199,16 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
                                 .addGap(18, 18, 18)
                                 .addComponent(JButtonLanzar))
                             .addComponent(jLabel2))
-                        .addGap(0, 38, Short.MAX_VALUE)))
+                        .addGap(0, 38, Short.MAX_VALUE))
+                    .addComponent(cronometro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(cronometro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(turnoAcutal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
@@ -245,6 +261,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonLanzar;
     private javax.swing.JTable JTableLIstadoJugadores;
+    private com.cunoc.escaleraserpiente.Cronometro.Cronometro cronometro1;
     private com.cunoc.escaleraserpiente.componentesJuego.Dado dado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

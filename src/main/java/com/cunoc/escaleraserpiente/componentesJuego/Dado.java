@@ -14,7 +14,7 @@ import javax.swing.JPanel;
  *
  * @author drymnz
  */
-public class Dado extends JPanel implements Runnable{
+public class Dado extends JPanel implements Runnable {
 
     private int limiteMaximo;
     private int limiteMinimo;
@@ -23,7 +23,7 @@ public class Dado extends JPanel implements Runnable{
     private boolean disponible;
     // constructor
 
-    public Dado(int limiteMaximo, int limiteMinimo, int numeroSalio, Color color,boolean disponible) {
+    public Dado(int limiteMaximo, int limiteMinimo, int numeroSalio, Color color, boolean disponible) {
         this.limiteMaximo = limiteMaximo;
         this.limiteMinimo = limiteMinimo;
         this.numeroSalio = numeroSalio;
@@ -32,7 +32,7 @@ public class Dado extends JPanel implements Runnable{
     }
 
     public Dado() {
-        this(6, 1, 0, Color.white,true);
+        this(6, 1, 0, Color.white, true);
     }
     //fin constructor
 
@@ -48,30 +48,34 @@ public class Dado extends JPanel implements Runnable{
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, this.getWidth(), this.getHeight());
         g.setFont(new Font("Time new Roman", Font.PLAIN, this.getHeight()));
-        g.drawString(numeroSalio+"",10, this.getHeight()-10);
+        g.drawString(numeroSalio + "<", 10, this.getHeight() - 10);
     }
 
     @Override
     public void run() {
-        int numeroAleatorio = (int) (Math.random()*10+10);
-        int fuerza = (int) (Math.random()*100+10);
+        int numeroAleatorio = (int) (Math.random() * 10 + 10);
+        int fuerza = (int) (Math.random() * 100 + 10);
         disponible = false;
         do {
-            try {
-                for (int i = 0; i < numeroAleatorio; i++) {
-                    int numeroAletorioDos  = (int) (Math.random()*limiteMaximo);
-                    if (numeroAletorioDos>limiteMinimo && numeroAletorioDos<limiteMaximo) {
-                        numeroSalio = numeroAletorioDos;
-                    }else{
-                        numeroSalio = limiteMaximo;
-                    }
+            for (int i = 0; i < numeroAleatorio; i++) {
+                int numeroAletorioDos = (int) (Math.random() * limiteMaximo);
+                if (numeroAletorioDos > limiteMinimo && numeroAletorioDos < limiteMaximo) {
+                    this.numeroSalio = numeroAletorioDos;
+                } else {
+                    this.numeroSalio = limiteMaximo;
                 }
-                Thread.sleep(1000/fuerza);
-                fuerza--;
+            }
+            fuerza--;
+            try {
+                Thread.sleep(1000 / fuerza);
             } catch (Exception e) {
             }
-        } while (fuerza>0);
+        } while (fuerza > 0);
         disponible = true;
+    }
+
+    public void setNumeroSalio(int numeroSalio) {
+        this.numeroSalio = numeroSalio;
     }
 
     public int getNumeroSalio() {
@@ -81,5 +85,5 @@ public class Dado extends JPanel implements Runnable{
     public boolean isDisponible() {
         return disponible;
     }
-    
+
 }

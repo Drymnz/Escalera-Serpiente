@@ -68,7 +68,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         } else {
             fichaEnMovimiento.setUbicacion(listado[0]);
             listado[0].setFicha(fichaEnMovimiento);
-            pasosMoverFicha++;
         }
     }
 
@@ -100,6 +99,15 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             moverFicha();
         }
     }
+
+    public void setFichaEnMovimiento(Ficha fichaEnMovimiento) {
+        this.fichaEnMovimiento = fichaEnMovimiento;
+    }
+
+    public void setPasosMoverFicha(int pasosMoverFicha) {
+        this.pasosMoverFicha = pasosMoverFicha;
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
 }

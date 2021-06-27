@@ -5,20 +5,85 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import com.cunoc.escaleraserpiente.Usuario.Usuario;
+import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author drymnz
  */
-public class PantallaDelJuego extends javax.swing.JPanel {
+public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
+
+    private Usuario[] listado;
+    private Ficha[] listadoFichas;
+    private int CantidadDeJugadores;
+    private int turno = 0;
 
     /**
      * Creates new form PantallaDelJuego
      */
-    public PantallaDelJuego(int fila, int columna) {
+    public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores) {
         initComponents();
+        this.CantidadDeJugadores = CantidadDeJugadores;
         tablero1.botones(fila, columna);
+        jugadores(listado);
+        turnoAcutal1.setDado(dado);
+    }
+
+    private void jugadores(Usuario[] Revisar) {
+        if (Revisar != null) {
+            listado = new Usuario[CantidadDeJugadores];
+            for (int i = 0; i < Revisar.length; i++) {
+                if (Revisar[i] != null) {
+
+                    listado[i] = Revisar[i];
+                }
+            }
+            asignarTurnos();
+        }
+    }
+
+    private void asignarTurnos() {
+        if (listado != null) {
+            int mazar = 10;
+            do {
+                int mover = (int) (Math.random() * listado.length - 1);
+                int con = (int) (Math.random() * listado.length - 1);
+                Usuario auxiliar = listado[mover];
+                listado[mover] = listado[con];
+                listado[con] = auxiliar;
+                mazar--;
+            } while (mazar == 0);
+            asignarFichas();
+        }
+
+    }
+
+    private void asignarFichas() {
+        if (listado != null) {
+            listadoFichas = new Ficha[listado.length];
+            for (int i = 0; i < listado.length; i++) {
+                listadoFichas[i] = new Ficha(colorAleatorio(), listado[i], null);
+            }
+        }
+        turnoAcutal1.turnoDe(listadoFichas[0]);
+        mostrarListadoJugadores();
+    }
+
+    private void mostrarListadoJugadores() {
+        DefaultTableModel modificar = (DefaultTableModel) JTableLIstadoJugadores.getModel();
+        for (int i = 0; i < listado.length; i++) {
+            if (listado[i] != null) {
+                modificar.addRow(new Object[]{listado[i].getId(), listado[i].getNombre(), listado[i].getApellido()});
+            }
+        }
+    }
+
+    private Color colorAleatorio() {
+        int numero = (int) (Math.random() * 5);
+        return (numero == 0) ? Color.BLUE : (numero == 1) ? Color.CYAN : (numero == 2) ? Color.DARK_GRAY : (numero == 3) ? Color.GRAY : Color.LIGHT_GRAY;
     }
 
     /**
@@ -34,6 +99,10 @@ public class PantallaDelJuego extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         dado = new com.cunoc.escaleraserpiente.componentesJuego.Dado();
         JButtonLanzar = new javax.swing.JButton();
+        turnoAcutal1 = new com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTableLIstadoJugadores = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
         tablero1.setLayout(tablero1Layout);
@@ -66,21 +135,64 @@ public class PantallaDelJuego extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout turnoAcutal1Layout = new javax.swing.GroupLayout(turnoAcutal1);
+        turnoAcutal1.setLayout(turnoAcutal1Layout);
+        turnoAcutal1Layout.setHorizontalGroup(
+            turnoAcutal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        turnoAcutal1Layout.setVerticalGroup(
+            turnoAcutal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 76, Short.MAX_VALUE)
+        );
+
+        JTableLIstadoJugadores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Nombre", "Apellido"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(JTableLIstadoJugadores);
+
+        jLabel1.setText("Listado de jugadores.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(JButtonLanzar)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(turnoAcutal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(JButtonLanzar)
+                        .addGap(0, 38, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(turnoAcutal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,7 +227,7 @@ public class PantallaDelJuego extends javax.swing.JPanel {
     private void JButtonLanzarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonLanzarActionPerformed
         // TODO add your handling code here:
         if (dado.isDisponible()) {
-            new Thread(dado).start();
+            new Thread(this).start();
         } else {
             JOptionPane.showMessageDialog(null, "Por favor espere que acabe el dado");
         }
@@ -124,8 +236,30 @@ public class PantallaDelJuego extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonLanzar;
+    private javax.swing.JTable JTableLIstadoJugadores;
     private com.cunoc.escaleraserpiente.componentesJuego.Dado dado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.cunoc.escaleraserpiente.componentesJuego.Tablero tablero1;
+    private com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal turnoAcutal1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void run() {
+        new Thread(dado).start();
+        do {
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+            }
+        } while (!dado.isDisponible());
+        int pasos = dado.getNumeroSalio();
+        tablero1.setFichaEnMovimiento(listadoFichas[turno]);
+        tablero1.setPasosMoverFicha(pasos);
+        turno = ((turno + 1) >= CantidadDeJugadores) ? 0 : (turno + 1);
+        new Thread(tablero1).start();
+        dado.setNumeroSalio(pasos);
+    }
+
 }

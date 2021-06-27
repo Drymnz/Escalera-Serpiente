@@ -50,37 +50,40 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.columna = columna;
         this.listado = new Casilla[columna * fila];
         this.setLayout(new GridLayout(fila, columna));
-        for (int i = (listado.length - 1); i >= 0; i--) {
-            listado[i] = asignarTipo(i+1);
+        listado[listado.length - 1] = new Casilla((fila * columna), null, new Color(234, 190, 63));// casilla victoria
+        this.add(listado[listado.length - 1]);
+        for (int i = (listado.length - 2); i >= 0; i--) {
+            listado[i] = asignarTipo(i + 1);
             this.add(listado[i]);
         }
     }
-    private Casilla asignarTipo(int id){
-        int aletorio = (int)(Math.random()*100);
-        Casilla asignarTipo = new Casilla(id , casillasSimples);
-        switch ((aletorio > 70)? 1:(aletorio > 50)? 2:(aletorio > 40)? 3:(aletorio > 35)? 4:(aletorio > 30)? 5:(aletorio > 10)? 6:7) {
-            case 1:// CASILLA SIMPLE
-                asignarTipo = new Casilla(id , casillasSimples);
+
+    private Casilla asignarTipo(int id) {
+        int aletorio = (int) (Math.random() * 100);
+        Casilla asignarTipo = null;
+        switch ((aletorio > 70) ? 1 : (aletorio > 50) ? 2 : (aletorio > 45) ? 3 : (aletorio > 40) ? 4 : (aletorio > 20) ? 5 : (aletorio > 5) ? 6 : 7) {
+            case 1:// CASILLA SIMPLE(aletorio > 70)
+                asignarTipo = new Casilla(id, casillasSimples);
                 break;
-            case 2:// CASILLA SERPIENTE
+            case 2:// CASILLA SERPIENTE (aletorio > 50)
                 asignarTipo = new Serpiente(id);
                 break;
-            case 3:// CASILLA RetrocederCasilla
+            case 3:// CASILLA RetrocederCasilla (aletorio > 40)
                 asignarTipo = new RetrocederCasilla(id);
                 break;
-            case 4:// CASILLA PierdeTurno
+            case 4:// CASILLA PierdeTurno (aletorio > 35)
                 asignarTipo = new PierdeTurno(id);
                 break;
-            case 5:// CASILLA NuevoTrueno
+            case 5:// CASILLA NuevoTrueno(aletorio > 30)
                 asignarTipo = new NuevoTrueno(id);
                 break;
-            case 6:// CASILLA Escalera
+            case 6:// CASILLA Escalera(aletorio > 15)
                 asignarTipo = new Escalera(id);
                 break;
             case 7:// CASILLA AvanzarMas
                 asignarTipo = new AvanzarMas(id);
                 break;
-   
+
         }
         return asignarTipo;
     }
@@ -94,8 +97,8 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
                     fichaEnMovimiento.getUbicacion().setFicha(null);
                 }
-                if (listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].getFicha()==null) {
-                   listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].setFicha(fichaEnMovimiento); 
+                if (listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].getFicha() == null) {
+                    listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].setFicha(fichaEnMovimiento);
                 }
                 fichaEnMovimiento.setUbicacion(listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover]);
             }

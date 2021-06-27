@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author drymnz
  */
-public class Casilla extends JPanel {
+public  class Casilla extends JPanel {
 
     private int id;
     private Ficha ficha;

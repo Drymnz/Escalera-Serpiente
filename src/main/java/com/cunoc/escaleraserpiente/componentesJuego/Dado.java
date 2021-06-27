@@ -48,7 +48,7 @@ public class Dado extends JPanel implements Runnable {
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, this.getWidth(), this.getHeight());
         g.setFont(new Font("Time new Roman", Font.PLAIN, this.getHeight()));
-        g.drawString(numeroSalio + "<", 10, this.getHeight() - 10);
+        g.drawString(numeroSalio + "", 10, this.getHeight() - 10);
     }
 
     @Override

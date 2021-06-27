@@ -6,6 +6,7 @@
 package com.cunoc.escaleraserpiente.componentesJuego;
 
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
+import com.cunoc.escaleraserpiente.casillasEspeciales.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
@@ -50,9 +51,38 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.listado = new Casilla[columna * fila];
         this.setLayout(new GridLayout(fila, columna));
         for (int i = (listado.length - 1); i >= 0; i--) {
-            listado[i] = new Casilla(i + 1, casillasSimples);
+            listado[i] = asignarTipo(i+1);
             this.add(listado[i]);
         }
+    }
+    private Casilla asignarTipo(int id){
+        int aletorio = (int)(Math.random()*100);
+        Casilla asignarTipo = new Casilla(id , casillasSimples);
+        switch ((aletorio > 70)? 1:(aletorio > 50)? 2:(aletorio > 40)? 3:(aletorio > 35)? 4:(aletorio > 30)? 5:(aletorio > 10)? 6:7) {
+            case 1:// CASILLA SIMPLE
+                asignarTipo = new Casilla(id , casillasSimples);
+                break;
+            case 2:// CASILLA SERPIENTE
+                asignarTipo = new Serpiente(id);
+                break;
+            case 3:// CASILLA RetrocederCasilla
+                asignarTipo = new RetrocederCasilla(id);
+                break;
+            case 4:// CASILLA PierdeTurno
+                asignarTipo = new PierdeTurno(id);
+                break;
+            case 5:// CASILLA NuevoTrueno
+                asignarTipo = new NuevoTrueno(id);
+                break;
+            case 6:// CASILLA Escalera
+                asignarTipo = new Escalera(id);
+                break;
+            case 7:// CASILLA AvanzarMas
+                asignarTipo = new AvanzarMas(id);
+                break;
+   
+        }
+        return asignarTipo;
     }
 
     private void moverFicha() {
@@ -61,8 +91,12 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna)) {
                 ganadorUsuario = fichaEnMovimiento.getUsuario();
             } else {
-                fichaEnMovimiento.getUbicacion().setFicha(null);
-                listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].setFicha(fichaEnMovimiento);
+                if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
+                    fichaEnMovimiento.getUbicacion().setFicha(null);
+                }
+                if (listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].getFicha()==null) {
+                   listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].setFicha(fichaEnMovimiento); 
+                }
                 fichaEnMovimiento.setUbicacion(listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover]);
             }
         } else {
@@ -109,5 +143,4 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

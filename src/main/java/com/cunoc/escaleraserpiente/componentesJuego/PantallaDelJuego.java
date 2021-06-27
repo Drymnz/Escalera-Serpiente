@@ -29,7 +29,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         this.CantidadDeJugadores = CantidadDeJugadores;
         tablero1.botones(fila, columna);
         jugadores(listado);
-        turnoAcutal1.setDado(dado);
+        turnoAcutal.setDado(dado);
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -68,7 +68,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
                 listadoFichas[i] = new Ficha(colorAleatorio(), listado[i], null);
             }
         }
-        turnoAcutal1.turnoDe(listadoFichas[0]);
+        turnoAcutal.turnoDe(listadoFichas[0]);
         mostrarListadoJugadores();
     }
 
@@ -99,10 +99,11 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         jPanel1 = new javax.swing.JPanel();
         dado = new com.cunoc.escaleraserpiente.componentesJuego.Dado();
         JButtonLanzar = new javax.swing.JButton();
-        turnoAcutal1 = new com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal();
+        turnoAcutal = new com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal();
         jScrollPane1 = new javax.swing.JScrollPane();
         JTableLIstadoJugadores = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
         tablero1.setLayout(tablero1Layout);
@@ -135,14 +136,14 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             }
         });
 
-        javax.swing.GroupLayout turnoAcutal1Layout = new javax.swing.GroupLayout(turnoAcutal1);
-        turnoAcutal1.setLayout(turnoAcutal1Layout);
-        turnoAcutal1Layout.setHorizontalGroup(
-            turnoAcutal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout turnoAcutalLayout = new javax.swing.GroupLayout(turnoAcutal);
+        turnoAcutal.setLayout(turnoAcutalLayout);
+        turnoAcutalLayout.setHorizontalGroup(
+            turnoAcutalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        turnoAcutal1Layout.setVerticalGroup(
-            turnoAcutal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        turnoAcutalLayout.setVerticalGroup(
+            turnoAcutalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 76, Short.MAX_VALUE)
         );
 
@@ -166,6 +167,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
 
         jLabel1.setText("Listado de jugadores.");
 
+        jLabel2.setText("Este es el dado :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -173,26 +176,31 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(turnoAcutal1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(turnoAcutal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(JButtonLanzar)
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(JButtonLanzar))
+                            .addComponent(jLabel2))
+                        .addGap(0, 38, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(turnoAcutal1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(turnoAcutal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,10 +247,11 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private javax.swing.JTable JTableLIstadoJugadores;
     private com.cunoc.escaleraserpiente.componentesJuego.Dado dado;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.cunoc.escaleraserpiente.componentesJuego.Tablero tablero1;
-    private com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal turnoAcutal1;
+    private com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal turnoAcutal;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -258,8 +267,17 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         tablero1.setFichaEnMovimiento(listadoFichas[turno]);
         tablero1.setPasosMoverFicha(pasos);
         turno = ((turno + 1) >= CantidadDeJugadores) ? 0 : (turno + 1);
-        new Thread(tablero1).start();
+        Thread p = new Thread(tablero1);
+        p.start();
+        while (p.isAlive()) {
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+            }
+        }
+        // aqui verificar si caso en una casillla en vanzar o retorceder ************************
         dado.setNumeroSalio(pasos);
+        turnoAcutal.turnoDe(listadoFichas[turno]);
     }
 
 }

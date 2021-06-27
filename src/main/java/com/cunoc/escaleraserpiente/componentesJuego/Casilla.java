@@ -42,7 +42,7 @@ public class Casilla extends JPanel {
         super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
         g.setColor(Color.BLACK);
         g.drawRect(0, 0, this.getWidth(), this.getHeight());
-        if (ficha != null) {
+        if (ficha != null && ficha.getUsuario()!=null) {
             g.setColor(ficha.getColor());
             g.fillOval(0, 0, this.getWidth(), this.getHeight());
             g.setColor(Color.BLACK);

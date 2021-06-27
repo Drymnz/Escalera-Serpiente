@@ -25,9 +25,9 @@ public class TurnoAcutal extends JPanel {
         this.setBackground(Color.WHITE);
     }
 
-    public void turnoDe(Ficha usuario) {
-        this.ficha = usuario;
-        this.usuario = usuario.getUsuario();
+    public void turnoDe(Ficha ficha) {
+        this.ficha = ficha;
+        this.usuario = ficha.getUsuario();
     }
 
     @Override

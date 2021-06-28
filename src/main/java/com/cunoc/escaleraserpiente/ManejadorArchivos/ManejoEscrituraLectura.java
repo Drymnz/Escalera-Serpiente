@@ -8,6 +8,7 @@ package com.cunoc.escaleraserpiente.ManejadorArchivos;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -38,18 +39,25 @@ public class ManejoEscrituraLectura {
         try {
             if (prueva.length() != 0) {// leer si el archivo contine algo
                 InputStream mirar = new FileInputStream(donde);
-                ObjectInputStream colocalo= new ObjectInputStream(mirar);
+                ObjectInputStream colocalo = new ObjectInputStream(mirar);
                 retunar = colocalo.readObject();
                 colocalo.close();
-                System.out.println("Se cargo el archivo "+donde.getName());
+                System.out.println("Se cargo el archivo " + donde.getName());
             }
         } catch (IOException e) {
-            System.out.println("error>>"+e.getMessage());
-        }catch (ClassNotFoundException a){
-            System.out.println("error>>"+ a.getMessage());
+            System.out.println("error>>" + e.getMessage());
+        } catch (ClassNotFoundException a) {
+            System.out.println("error>>" + a.getMessage());
         }
         return retunar;
     }
-    public void escribirArchivoTexto(String escribir,File donde){
+
+    public void escribirArchivoTexto(String textoEscrivir, File donde) {
+        try {
+            FileWriter escritor = new FileWriter(donde);
+            escritor.write(textoEscrivir);
+        } catch (IOException e) {
+        }
+
     }
 }

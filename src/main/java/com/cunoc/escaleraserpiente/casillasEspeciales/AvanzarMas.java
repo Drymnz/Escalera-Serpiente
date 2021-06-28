@@ -26,6 +26,9 @@ public class AvanzarMas extends Casilla {
     public AvanzarMas(int id) {
         this(id, null, Color.CYAN, (int)(Math.random()*10)+1);
     }
+    public AvanzarMas(int id, int avanzar) {
+        this(id, null, Color.CYAN, avanzar);
+    }
 
     @Override
     protected void paintComponent(Graphics g) {

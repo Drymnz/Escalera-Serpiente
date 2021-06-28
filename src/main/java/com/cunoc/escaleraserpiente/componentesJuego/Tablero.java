@@ -27,6 +27,17 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     /**
      * Creates new form Tablero
      */
+    
+    public Tablero(Casilla[] listado, int fila, int columna, Ficha fichaEnMovimiento, int pasosMoverFicha, Color casillasSimples, Usuario ganadorUsuario) {
+        this.listado = listado;
+        this.fila = fila;
+        this.columna = columna;
+        this.fichaEnMovimiento = fichaEnMovimiento;
+        this.pasosMoverFicha = pasosMoverFicha;
+        this.casillasSimples = casillasSimples;
+        this.ganadorUsuario = ganadorUsuario;
+    }
+
     public Tablero(int columna, int fila) {
         this.fila = fila;
         this.columna = columna;
@@ -148,6 +159,19 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     public void setPasosMoverFicha(int pasosMoverFicha) {
         this.pasosMoverFicha = pasosMoverFicha;
     }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public Casilla[] getListado() {
+        return listado;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

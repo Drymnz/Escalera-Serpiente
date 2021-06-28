@@ -19,13 +19,17 @@ public class RetrocederCasilla extends Casilla {
 
     private int retroceder;
 
-    public RetrocederCasilla(int id, Ficha ficha, Color color, int retroceder ) {
+    public RetrocederCasilla(int id, Ficha ficha, Color color, int retroceder) {
         super(id, ficha, color);
         this.retroceder = retroceder;
     }
 
     public RetrocederCasilla(int id) {
-        this(id, null, Color.yellow,  (int)(Math.random()*10)+1);
+        this(id, null, Color.yellow, (int) (Math.random() * 10) + 1);
+    }
+
+    public RetrocederCasilla(int id, int retroceder) {
+        this(id, null, Color.yellow, retroceder);
     }
 
     @Override

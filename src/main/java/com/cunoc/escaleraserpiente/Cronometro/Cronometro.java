@@ -16,9 +16,9 @@ import javax.swing.JPanel;
 public class Cronometro extends JPanel implements Runnable {
     // private String tiempo = "hora:minuto:segundo";
 
-    private int minuto = 0;
-    private int segundo = 0;
-    private int hora = 0;
+    private int minuto ;
+    private int segundo ;
+    private int hora ;
     private boolean detener = false;
 
     // constructores 
@@ -55,8 +55,9 @@ public class Cronometro extends JPanel implements Runnable {
                 Thread.sleep(1000);
             } catch (Exception e) {
             }
-            hora = (minuto > 60) ? (hora + 1) : hora + 0;
+            hora = (minuto >= 60) ? (hora + 1) : hora + 0;
             minuto = (segundo >= 60) ? (minuto + 1) : (minuto + 0);
+            minuto = (minuto >= 60) ? 0 :(minuto + 0);
             segundo = (segundo >= 60) ? 0 : segundo + 1;
         } while (!detener);
     }

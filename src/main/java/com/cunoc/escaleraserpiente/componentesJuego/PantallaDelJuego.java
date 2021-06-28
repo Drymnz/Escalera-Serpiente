@@ -5,8 +5,12 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
+import com.cunoc.escaleraserpiente.Start;
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
+import com.cunoc.escaleraserpiente.guardarPartidaCargar.ManejoGuardarPartida;
 import java.awt.Color;
+import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,6 +24,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private Ficha[] listadoFichas;
     private int CantidadDeJugadores;
     private int turno = 0;
+    private ReglaJuegoSS reglas;
+    private Thread hiloCronometro;
 
     /**
      * Creates new form PantallaDelJuego
@@ -30,7 +36,9 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         tablero1.botones(fila, columna);
         jugadores(listado);
         turnoAcutal.setDado(dado);
-        new Thread(cronometro1).start();
+        hiloCronometro = new Thread(cronometro1);
+        hiloCronometro.start();
+        reglas = new ReglaJuegoSS(listadoFichas, listadoFichas, tablero1, CantidadDeJugadores, turno);
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -106,6 +114,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cronometro1 = new com.cunoc.escaleraserpiente.Cronometro.Cronometro();
+        jButton1 = new javax.swing.JButton();
+        Registro = new javax.swing.JLabel();
 
         javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
         tablero1.setLayout(tablero1Layout);
@@ -179,28 +189,39 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         );
         cronometro1Layout.setVerticalGroup(
             cronometro1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 64, Short.MAX_VALUE)
+            .addGap(0, 45, Short.MAX_VALUE)
         );
+
+        jButton1.setText("Guardar ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        Registro.setText("El truno acabo en .");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(turnoAcutal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Registro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(turnoAcutal, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                    .addComponent(cronometro1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(JButtonLanzar))
-                            .addComponent(jLabel2))
-                        .addGap(0, 38, Short.MAX_VALUE))
-                    .addComponent(cronometro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(JButtonLanzar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -208,22 +229,26 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(cronometro1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(turnoAcutal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(turnoAcutal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(JButtonLanzar)
-                        .addGap(40, 40, 40))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(JButtonLanzar)))
+                .addGap(18, 18, 18)
+                .addComponent(Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -256,13 +281,21 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             JOptionPane.showMessageDialog(null, "Por favor espere que acabe el dado");
         }
     }//GEN-LAST:event_JButtonLanzarActionPerformed
+// aqui es para aguardar la partidad
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Start.ejecutar.irMenuPrincipal();
+        new Thread(new ManejoGuardarPartida(tablero1,listado)).start();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonLanzar;
     private javax.swing.JTable JTableLIstadoJugadores;
+    private javax.swing.JLabel Registro;
     private com.cunoc.escaleraserpiente.Cronometro.Cronometro cronometro1;
     private com.cunoc.escaleraserpiente.componentesJuego.Dado dado;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
@@ -283,7 +316,6 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         int pasos = dado.getNumeroSalio();
         tablero1.setFichaEnMovimiento(listadoFichas[turno]);
         tablero1.setPasosMoverFicha(pasos);
-        turno = ((turno + 1) >= CantidadDeJugadores) ? 0 : (turno + 1);
         Thread p = new Thread(tablero1);
         p.start();
         while (p.isAlive()) {
@@ -294,7 +326,23 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         }
         // aqui verificar si caso en una casillla en vanzar o retorceder ************************
         dado.setNumeroSalio(pasos);
+        //turno = 
+        reglas.aplicarRegla(listadoFichas[turno]);
+        turno = reglas.getTurno();
+        Registro.setText(reglas.getMencionar());
         turnoAcutal.turnoDe(listadoFichas[turno]);
+        if (tablero1.getGanadorUsuario() != null) {
+            hiloCronometro.stop();
+            for (int i = 0; i < listado.length; i++) {
+                if (listado[i] == tablero1.getGanadorUsuario()) {
+                    listado[i].setVictoria(listado[i].getVictoria() + 1);
+                } else {
+                    listado[i].setPerdida(listado[i].getPerdida() + 1);
+                }
+                listado[i].setCantidadPartidad(listado[i].getCantidadPartidad() + 1);
+                (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
+            }
+        }
     }
 
 }

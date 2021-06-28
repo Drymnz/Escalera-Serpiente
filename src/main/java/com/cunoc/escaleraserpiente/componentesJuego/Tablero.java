@@ -61,26 +61,26 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private Casilla asignarTipo(int id) {
         int aletorio = (int) (Math.random() * 100);
         Casilla asignarTipo = null;
-        switch ((aletorio > 70) ? 1 : (aletorio > 50) ? 2 : (aletorio > 45) ? 3 : (aletorio > 40) ? 4 : (aletorio > 20) ? 5 : (aletorio > 5) ? 6 : 7) {
-            case 1:// CASILLA SIMPLE(aletorio > 70)
+        switch ((aletorio > 60) ? 1 : (aletorio > 50) ? 2 : (aletorio > 40) ? 3 : (aletorio > 30) ? 4 : (aletorio > 20) ? 5 : (aletorio > 10) ? 6 : 7) {
+            case 1:// CASILLA SIMPLE 
                 asignarTipo = new Casilla(id, casillasSimples);
                 break;
-            case 2:// CASILLA SERPIENTE (aletorio > 50)
+            case 2:// CASILLA SERPIENTE  10
                 asignarTipo = new Serpiente(id);
                 break;
-            case 3:// CASILLA RetrocederCasilla (aletorio > 40)
+            case 3:// CASILLA RetrocederCasilla  10
                 asignarTipo = new RetrocederCasilla(id);
                 break;
-            case 4:// CASILLA PierdeTurno (aletorio > 35)
+            case 4:// CASILLA PierdeTurno 10
                 asignarTipo = new PierdeTurno(id);
                 break;
-            case 5:// CASILLA NuevoTrueno(aletorio > 30)
+            case 5:// CASILLA NuevoTrueno 10
                 asignarTipo = new NuevoTrueno(id);
                 break;
-            case 6:// CASILLA Escalera(aletorio > 15)
+            case 6:// CASILLA Escalera 10
                 asignarTipo = new Escalera(id);
                 break;
-            case 7:// CASILLA AvanzarMas
+            case 7:// CASILLA AvanzarMas 10
                 asignarTipo = new AvanzarMas(id);
                 break;
 
@@ -89,10 +89,10 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     }
 
     private void moverFicha() {
-        if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null)) {
+        if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() > -1)) {
             int mover = (pasosMoverFicha > 0) ? 1 : -1;
             if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna)) {
-                ganadorUsuario = fichaEnMovimiento.getUsuario();
+                this.ganadorUsuario = fichaEnMovimiento.getUsuario();
             } else {
                 if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
                     fichaEnMovimiento.getUbicacion().setFicha(null);
@@ -135,6 +135,10 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             }
             moverFicha();
         }
+    }
+
+    public Usuario getGanadorUsuario() {
+        return ganadorUsuario;
     }
 
     public void setFichaEnMovimiento(Ficha fichaEnMovimiento) {

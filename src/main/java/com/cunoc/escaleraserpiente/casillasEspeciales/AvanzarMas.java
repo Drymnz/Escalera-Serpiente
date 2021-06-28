@@ -35,4 +35,8 @@ public class AvanzarMas extends Casilla {
         g.drawString(avanzar+"", 10, this.getHeight());
     }
 
+    public int getAvanzar() {
+        return avanzar;
+    }
+
 }

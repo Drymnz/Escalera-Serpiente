@@ -8,6 +8,7 @@ package com.cunoc.escaleraserpiente.interfas;
 import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
 import com.cunoc.escaleraserpiente.Start;
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
+import com.cunoc.escaleraserpiente.componentesJuego.PantallaDelJuego;
 import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -276,11 +277,8 @@ public class MenuJuego extends javax.swing.JPanel {
     private void JButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonIniciarActionPerformed
         // TODO add your handling code here:
         if (contadorJugadores > 1) {
-            /*/ si puede juegar
-            iniciar el juego
-            mandar el listado listadoJugadores para que cuente cuantos jugadores y quienes jugaran
-             */
-            Start.ejecutar.jugar();
+            PantallaDelJuego nuevaPartida = new PantallaDelJuego(10, 10, listadoJugadores, contadorJugadores);
+            Start.ejecutar.jugar(nuevaPartida);
         } else {
             JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");
         }

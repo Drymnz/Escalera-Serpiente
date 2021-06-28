@@ -46,7 +46,10 @@ public  class Casilla extends JPanel {
             g.setColor(ficha.getColor());
             g.fillOval(0, 0, this.getWidth(), this.getHeight());
             g.setColor(Color.BLACK);
-            g.drawString(ficha.getUsuario().getNombre(), this.getWidth() / 2, this.getHeight() / 2);
+            try {
+               g.drawString(ficha.getUsuario().getNombre(), this.getWidth() / 2, this.getHeight() / 2); 
+            } catch (Exception e) {
+            }
         } else {
             g.setColor(Color.BLACK);
             g.drawString(id + "", this.getWidth() / 2, this.getHeight() / 2);

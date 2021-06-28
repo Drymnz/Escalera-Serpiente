@@ -35,4 +35,8 @@ public class RetrocederCasilla extends Casilla {
         g.setFont(new Font("Time new Roman", Font.PLAIN, this.getHeight()));
         g.drawString(retroceder + "", 10, this.getHeight());
     }
+
+    public int getRetroceder() {
+        return retroceder;
+    }
 }

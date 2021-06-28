@@ -26,7 +26,6 @@ public class Ventana extends javax.swing.JFrame {
     private IniciarSeccion cargarPartida = new IniciarSeccion();
     private Registrar RegistrarUsuario;
     private MenuReporte menuRerpote = new MenuReporte();
-    private PantallaDelJuego juego = new PantallaDelJuego(0,0,null,1);
 
     //fin  instancias de las sub menus
     /**
@@ -46,7 +45,7 @@ public class Ventana extends javax.swing.JFrame {
         JPanelBase.add(cargarPartida, "CargarPartidad");
         JPanelBase.add(RegistrarUsuario, "RegistrarUsuario");
         JPanelBase.add(menuRerpote, "Reportes");
-        JPanelBase.add(juego, "Jugar");
+
     }
 
     public void irMenuPrincipal() {
@@ -82,10 +81,12 @@ public class Ventana extends javax.swing.JFrame {
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
     }
+
     //fin metodos para cambiar de ventana
     // para iniciar le juego
-    public void jugar() {
+    public void jugar(PantallaDelJuego juego) {
         this.setSize(1280, 720);
+        JPanelBase.add(juego, "Jugar");
         carpeta.show(JPanelBase, "Jugar");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();
@@ -117,10 +118,6 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel JPanelBase;

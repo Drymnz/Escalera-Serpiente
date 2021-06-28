@@ -100,6 +100,12 @@ public class ManejoCargaPartida {
                 int avancenumeroretrocede = Integer.parseInt(numeroretrocede[3]);
                 this.casillas[filanumeroretrocede][columnanumeroretrocede] = new RetrocederCasilla(matrizGuia[filanumeroretrocede][columnanumeroretrocede],avancenumeroretrocede);
                 break;
+            case "subida":
+                
+                break;
+            case "bajada":
+                
+                break;
         }
     }
     private void crearMatrizGuia(int fila, int columna){

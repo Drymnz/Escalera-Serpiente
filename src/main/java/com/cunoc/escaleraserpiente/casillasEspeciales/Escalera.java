@@ -24,6 +24,11 @@ public class Escalera extends Casilla {
         this.subir = subir;
     }
 
+    public Escalera(int id,Casilla subir) {
+        this(WIDTH, null,Color.WHITE, subir);
+        this.subir = subir;
+    }
+
     public Escalera(int id) {
         this(id, null, Color.WHITE, null);
     }

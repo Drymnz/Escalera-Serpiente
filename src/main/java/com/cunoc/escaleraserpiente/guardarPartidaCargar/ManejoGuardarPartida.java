@@ -5,6 +5,7 @@
  */
 package com.cunoc.escaleraserpiente.guardarPartidaCargar;
 
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.componentesJuego.Tablero;
 
@@ -15,6 +16,7 @@ import com.cunoc.escaleraserpiente.componentesJuego.Tablero;
 public class ManejoGuardarPartida implements Runnable {
     private Tablero tablero;
     private Usuario[] listado;
+    private String escribir;
 
     public ManejoGuardarPartida(Tablero tablero, Usuario[] listado) {
         this.tablero = tablero;
@@ -24,6 +26,7 @@ public class ManejoGuardarPartida implements Runnable {
 
     @Override
     public void run() {
+        
     }
 
 }

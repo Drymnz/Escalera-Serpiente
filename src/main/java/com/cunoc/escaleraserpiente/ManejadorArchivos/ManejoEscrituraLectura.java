@@ -50,4 +50,6 @@ public class ManejoEscrituraLectura {
         }
         return retunar;
     }
+    public void escribirArchivoTexto(String escribir,File donde){
+    }
 }

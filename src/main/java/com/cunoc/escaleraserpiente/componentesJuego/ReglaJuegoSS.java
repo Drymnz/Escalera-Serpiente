@@ -33,7 +33,7 @@ public class ReglaJuegoSS {
         this.turno = turno;
     }
 
-    public ReglaJuegoSS(Ficha[] pierdeTurno, Ficha[] listado, Tablero tablero, int CantidadDeJugadores, int turno) {
+    public ReglaJuegoSS( Ficha[] listado, Tablero tablero, int CantidadDeJugadores, int turno) {
         this("", new Ficha[CantidadDeJugadores + 1], listado, null, tablero, CantidadDeJugadores, turno);
     }
 
@@ -90,7 +90,7 @@ public class ReglaJuegoSS {
         }
     }
 
-    public void turnoSiguiente() {
+    private void turnoSiguiente() {
         this.turno = ((this.turno + 1) >= CantidadDeJugadores) ? 0 : (this.turno + 1);
         for (int i = 0; i < pierdeTurno.length; i++) {
             if (pierdeTurno[i] != null && listado[turno] == pierdeTurno[i]) {

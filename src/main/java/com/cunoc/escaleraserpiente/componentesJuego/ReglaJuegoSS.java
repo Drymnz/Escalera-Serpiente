@@ -33,7 +33,7 @@ public class ReglaJuegoSS {
         this.turno = turno;
     }
 
-    public ReglaJuegoSS(Ficha[] pierdeTurno, Ficha[] listado, Tablero tablero, int CantidadDeJugadores, int turno) {
+    public ReglaJuegoSS( Ficha[] listado, Tablero tablero, int CantidadDeJugadores, int turno) {
         this("", new Ficha[CantidadDeJugadores + 1], listado, null, tablero, CantidadDeJugadores, turno);
     }
 

@@ -38,7 +38,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         turnoAcutal.setDado(dado);
         hiloCronometro = new Thread(cronometro1);
         hiloCronometro.start();
-        reglas = new ReglaJuegoSS(listadoFichas, listadoFichas, tablero1, CantidadDeJugadores, turno);
+        reglas = new ReglaJuegoSS( listadoFichas, tablero1, CantidadDeJugadores, turno);
     }
 
     private void jugadores(Usuario[] Revisar) {

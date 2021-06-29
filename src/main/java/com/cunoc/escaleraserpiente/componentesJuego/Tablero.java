@@ -131,14 +131,14 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 this.ganadorUsuario = fichaEnMovimiento.getUsuario();
                 Start.ejecutar.irMenuPrincipal();
                 for (int i = 0; i < listado.length; i++) {
-                if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
-                    listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
-                } else {
-                   listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
+                    if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
+                        listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
+                    } else {
+                        listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
+                    }
+                    listado[i].getFicha().getUsuario().setCantidadPartidad(listado[i].getFicha().getUsuario().getCantidadPartidad() + 1);
+                    (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
                 }
-                listado[i].getFicha().getUsuario().setCantidadPartidad(listado[i].getFicha().getUsuario().getCantidadPartidad() + 1);
-                (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
-            }
             } else {
                 if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
                     fichaEnMovimiento.getUbicacion().setFicha(null);
@@ -151,6 +151,19 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         } else {
             fichaEnMovimiento.setUbicacion(listado[0]);
             listado[0].setFicha(fichaEnMovimiento);
+        }
+    }
+
+    private void gano() {
+        for (int i = 0; i < listado.length; i++) {
+            if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
+                listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
+            } else {
+                listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
+            }
+            listado[i].getFicha().getUsuario().setCantidadPartidad(listado[i].getFicha().getUsuario().getCantidadPartidad() + 1);
+            (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
+            Start.ejecutar.irMenuPrincipal();
         }
     }
 
@@ -181,6 +194,9 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             }
             if (fichaEnMovimiento.getUbicacion() == null || (fichaEnMovimiento.getUbicacion() != null && fichaEnMovimiento.getUbicacion().getId() > 0 && fichaEnMovimiento.getUbicacion().getId() < ((fila * columna) + 1))) {
                 moverFicha();
+                if (fichaEnMovimiento.getUbicacion().getId() >= ((fila * columna))) {
+                gano();
+            }
             }
         }
     }

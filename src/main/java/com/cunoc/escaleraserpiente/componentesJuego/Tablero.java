@@ -90,13 +90,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             case 1:// CASILLA SIMPLE 
                 asignarTipo = new Casilla(id, casillasSimples);
                 break;
-            case 2:// CASILLA SERPIENTE  10
-                if (2 * columna < id) {
-                    asignarTipo = new Serpiente(id, (buscarCasillaCola(id, false)));
-                } else {
-                    asignarTipo = new Casilla(id, casillasSimples);
-                }
-                break;
             case 3:// CASILLA RetrocederCasilla  10
                 asignarTipo = new RetrocederCasilla(id);
                 break;
@@ -106,35 +99,32 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             case 5:// CASILLA NuevoTrueno 10
                 asignarTipo = new NuevoTrueno(id);
                 break;
-            case 6:// CASILLA Escalera 10
-                asignarTipo = new Escalera(id);
-                break;
+
             case 7:// CASILLA AvanzarMas 10
                 asignarTipo = new AvanzarMas(id);
+                break;
+            case 2:// CASILLA SERPIENTE  10
+                if (2 * columna < id) {
+                    asignarTipo = new Serpiente(id);
+                } else {
+                    asignarTipo = new Casilla(id, casillasSimples);
+                }
+                break;
+            case 6:// CASILLA Escalera 10
+                if (id < ((fila * columna) - (2 * columna))) {
+                    asignarTipo = new Escalera(id);
+                } else {
+                    asignarTipo = new Casilla(id, casillasSimples);
+                }
                 break;
 
         }
         return asignarTipo;
     }
-
-    private Casilla buscarCasillaCola(int id, boolean mayorMeno) {
-        int rando = mayorMeno? (int) (Math.random() * fila) + fila :(int) (Math.random() * id) - fila;
-        Casilla dar = null;
-        do {
-            rando = mayorMeno? (int) (Math.random() * fila) + fila :(int) (Math.random() * id) - fila;
-            if (rando >= 0 && rando < fila * columna && ((mayorMeno) ? (rando > id) : (rando < id))) {
-                dar = new Casilla(rando, casillasSimples);
-                listado[rando] = dar;
-                return dar;
-            }
-        } while (rando >= 0 && rando < fila * columna);
-        return listado[0];
-    }
-
     private void moverFicha() {
-        if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() > -1)) {
+        if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() < (fila * columna)) && (fichaEnMovimiento.getUbicacion().getId() > (-1))) {
             int mover = (pasosMoverFicha > 0) ? 1 : -1;
-            if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna)) {
+            if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) < (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) > -1) {
                 this.ganadorUsuario = fichaEnMovimiento.getUsuario();
             } else {
                 if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
@@ -176,7 +166,9 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 Thread.sleep(500);
             } catch (Exception e) {
             }
-            moverFicha();
+            if (fichaEnMovimiento.getUbicacion() == null || (fichaEnMovimiento.getUbicacion() != null && fichaEnMovimiento.getUbicacion().getId() > 0 && fichaEnMovimiento.getUbicacion().getId() < ((fila * columna) + 1))) {
+                moverFicha();
+            }
         }
     }
 

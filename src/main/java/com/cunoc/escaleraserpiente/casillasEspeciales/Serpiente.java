@@ -25,6 +25,9 @@ public class Serpiente extends Casilla{
     public Serpiente(int id,Casilla cola) {
         this(id, null, Color.WHITE,cola);
     }
+    public Serpiente(int id) {
+        this(id, null, Color.WHITE,null);
+    }
   
     @Override
     protected void paintComponent(Graphics g) {

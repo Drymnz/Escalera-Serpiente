@@ -158,6 +158,7 @@ public class ManejoCargaPartida {
             for (int j = 0; j < columna; j++) {
                 matrizGuia[i][j] = contador;
                 contador--;
+        
             }
         }
     }

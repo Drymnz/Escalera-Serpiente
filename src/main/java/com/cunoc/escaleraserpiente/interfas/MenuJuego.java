@@ -293,10 +293,12 @@ public class MenuJuego extends javax.swing.JPanel {
                     ver = Buscador.getSelectedFile();
                 } while (!(ver.canRead()) || !ver.getName().endsWith("txt"));
                 Tablero nuevo = (new ManejoCargaPartida(ver)).getTerminado();
-                nuevaPartida.setTablero1(nuevo);
-                nuevo.cargar();
+                PantallaDelJuego nuevaPartidaCon = new PantallaDelJuego(nuevo.getFila(), nuevo.getColumna(), listadoJugadores, contadorJugadores, nuevo);
+                Start.ejecutar.jugar(nuevaPartidaCon);
+            } else {
+                Start.ejecutar.jugar(nuevaPartida);
+
             }
-            Start.ejecutar.jugar(nuevaPartida);
         } else {
             JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");
         }

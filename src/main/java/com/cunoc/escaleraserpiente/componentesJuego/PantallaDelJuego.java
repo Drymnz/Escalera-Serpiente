@@ -24,6 +24,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private Ficha[] listadoFichas;
     private int CantidadDeJugadores;
     private int turno = 0;
+    private int fila, columna;
     private ReglaJuegoSS reglas;
     private Thread hiloCronometro;
 
@@ -33,12 +34,31 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores) {
         initComponents();
         this.CantidadDeJugadores = CantidadDeJugadores;
-        tablero1.botones(fila, columna);
-        jugadores(listado);
         turnoAcutal.setDado(dado);
         hiloCronometro = new Thread(cronometro1);
         hiloCronometro.start();
-        reglas = new ReglaJuegoSS( listadoFichas, tablero1, CantidadDeJugadores, turno);
+        this.fila = fila;
+        this.columna = columna;
+        jugadores(listado);
+        tabla();
+    }
+
+    public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores, Tablero tablero) {
+        this.tablero1 = tablero;
+        initComponents();
+        this.CantidadDeJugadores = CantidadDeJugadores;
+        turnoAcutal.setDado(dado);
+        hiloCronometro = new Thread(cronometro1);
+        hiloCronometro.start();
+        this.fila = fila;
+        this.columna = columna;
+        jugadores(listado);
+        tabla();
+    }
+
+    public void tabla() {
+        tablero1.botones(fila, columna);
+        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -285,7 +305,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Start.ejecutar.irMenuPrincipal();
-        new Thread(new ManejoGuardarPartida(tablero1,listado)).start();
+        new Thread(new ManejoGuardarPartida(tablero1, listado)).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
@@ -306,6 +326,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
 
     @Override
     public void run() {
+        tablero1.setFichaEnMovimiento(listadoFichas[turno]);
         new Thread(dado).start();
         do {
             try {
@@ -331,7 +352,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         turno = reglas.getTurno();
         Registro.setText(reglas.getMencionar());
         turnoAcutal.turnoDe(listadoFichas[turno]);
-        if (tablero1.getGanadorUsuario() != null) {
+
+        if ((listadoFichas[turno].getUbicacion() != null && listadoFichas[turno].getUbicacion().getId() > fila * columna) || tablero1.getGanadorUsuario() != null) {
             hiloCronometro.stop();
             for (int i = 0; i < listado.length; i++) {
                 if (listado[i] == tablero1.getGanadorUsuario()) {
@@ -342,6 +364,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
                 listado[i].setCantidadPartidad(listado[i].getCantidadPartidad() + 1);
                 (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
             }
+            Start.ejecutar.irMenuPrincipal();
         }
     }
 

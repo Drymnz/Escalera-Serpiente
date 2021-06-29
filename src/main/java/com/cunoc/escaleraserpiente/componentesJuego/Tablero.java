@@ -5,11 +5,14 @@
  */
 package com.cunoc.escaleraserpiente.componentesJuego;
 
+import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
+import com.cunoc.escaleraserpiente.Start;
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.casillasEspeciales.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.io.File;
 
 /**
  *
@@ -124,8 +127,18 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private void moverFicha() {
         if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() < (fila * columna)) && (fichaEnMovimiento.getUbicacion().getId() > (-1))) {
             int mover = (pasosMoverFicha > 0) ? 1 : -1;
-            if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) < (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) > -1) {
+            if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) < (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) > 0) {
                 this.ganadorUsuario = fichaEnMovimiento.getUsuario();
+                Start.ejecutar.irMenuPrincipal();
+                for (int i = 0; i < listado.length; i++) {
+                if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
+                    listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
+                } else {
+                   listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
+                }
+                listado[i].getFicha().getUsuario().setCantidadPartidad(listado[i].getFicha().getUsuario().getCantidadPartidad() + 1);
+                (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
+            }
             } else {
                 if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
                     fichaEnMovimiento.getUbicacion().setFicha(null);

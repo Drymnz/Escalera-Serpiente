@@ -13,6 +13,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -157,6 +158,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private void gano() {
         for (int i = 0; i < listado.length; i++) {
             if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
+                JOptionPane.showMessageDialog(null, "GAno>>>> "+ganadorUsuario.getId()+" Nombre >>>"+ganadorUsuario.getNombre());
                 listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
             } else {
                 listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);

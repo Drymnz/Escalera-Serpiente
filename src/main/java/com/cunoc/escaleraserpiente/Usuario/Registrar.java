@@ -43,11 +43,12 @@ public class Registrar extends javax.swing.JPanel {
         JTextFieldApellido = new javax.swing.JTextField();
         JButtonRegistrar = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(106, 132, 94));
+        setBackground(new java.awt.Color(46, 214, 178));
 
         DecirUnoDescripcion.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         DecirUnoDescripcion.setText("Para registrar a usuarios");
 
+        JButtonMenuPrincipal.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonMenuPrincipal.setText("Menu Principal");
         JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,9 +59,15 @@ public class Registrar extends javax.swing.JPanel {
         JLabelDecir.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         JLabelDecir.setText("Escribar el nombre del usuario :");
 
+        JTextFieldNombre.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        JTextFieldNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel1.setFont(new java.awt.Font("Ubuntu", 0, 18)); // NOI18N
         jLabel1.setText("Escriba el apellido del usuario :");
 
+        JTextFieldApellido.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+
+        JButtonRegistrar.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonRegistrar.setText("Registrar");
         JButtonRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,14 +81,15 @@ public class Registrar extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(JButtonMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DecirUnoDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JLabelDecir)
-                    .addComponent(JTextFieldNombre)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JTextFieldApellido)
-                    .addComponent(JButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(DecirUnoDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                        .addComponent(JLabelDecir)
+                        .addComponent(JTextFieldNombre)
+                        .addComponent(JTextFieldApellido)
+                        .addComponent(JButtonRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(JButtonMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -94,14 +102,14 @@ public class Registrar extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(JLabelDecir)
                 .addGap(18, 18, 18)
-                .addComponent(JTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTextFieldNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(JTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(JTextFieldApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(JButtonRegistrar)
-                .addContainerGap(311, Short.MAX_VALUE))
+                .addContainerGap(261, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

@@ -66,13 +66,15 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
 
         setBackground(new java.awt.Color(160, 111, 111));
 
-        JButtonMenuPrincial.setText("Menu Princial");
+        JButtonMenuPrincial.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
+        JButtonMenuPrincial.setText("Menu");
         JButtonMenuPrincial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButtonMenuPrincialActionPerformed(evt);
             }
         });
 
+        JButtonActualizar.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonActualizar.setText("Actualizar");
         JButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -99,11 +101,11 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(JButtonMenuPrincial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 195, Short.MAX_VALUE)
-                .addComponent(JButtonActualizar)
-                .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(JButtonMenuPrincial, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(JButtonActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +115,7 @@ public class MenuReporte extends javax.swing.JPanel implements Runnable {
                     .addComponent(JButtonMenuPrincial)
                     .addComponent(JButtonActualizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 563, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

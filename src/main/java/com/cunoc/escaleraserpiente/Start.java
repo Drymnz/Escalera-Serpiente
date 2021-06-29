@@ -18,7 +18,7 @@ public class Start {
 
     public static void main(String[] args) {
         (new ManejoCarga()).verificarCarpetasNesesarias();
-        ejecutar.setSize(400, 620);
+        ejecutar.setSize(338, 620);
         ejecutar.setResizable(false);
         ejecutar.setVisible(true);
         ejecutar.setLocationRelativeTo(null);

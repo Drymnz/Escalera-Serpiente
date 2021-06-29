@@ -23,32 +23,34 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="JLabelLogo" max="32767" attributes="0"/>
+                      <Component id="JLabelLogo" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="JButtonJugar" max="32767" attributes="0"/>
-                          <Component id="JButtonCargarPartica" max="32767" attributes="0"/>
-                          <Component id="JButtonRegistrarUsuario" pref="206" max="32767" attributes="0"/>
-                          <Component id="JButtonReportes" max="32767" attributes="0"/>
-                          <Component id="JButtonSalir" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="JButtonJugar" max="32767" attributes="0"/>
+                  <Component id="JButtonCargarPartica" max="32767" attributes="0"/>
+                  <Component id="JButtonRegistrarUsuario" pref="206" max="32767" attributes="0"/>
+                  <Component id="JButtonReportes" max="32767" attributes="0"/>
+                  <Component id="JButtonSalir" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="JLabelLogo" min="-2" pref="114" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="JLabelLogo" min="-2" pref="269" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="JButtonJugar" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="JButtonCargarPartica" min="-2" max="-2" attributes="0"/>
@@ -58,7 +60,8 @@
               <Component id="JButtonReportes" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="JButtonSalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="189" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,13 +83,18 @@
     </Component>
     <Component class="javax.swing.JLabel" name="JLabelLogo">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Juego serpiente y escalera"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="/home/drymnz/NetBeansProjects/EscaleraSerpiente/src/main/resources/path54.png"/>
+        </Property>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="JButtonCargarPartica">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cargar Partica"/>
       </Properties>
@@ -99,6 +107,9 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
         </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="24" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Registrar Usuario"/>
       </Properties>
       <Events>
@@ -109,6 +120,9 @@
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="24" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Reportes"/>
       </Properties>
@@ -121,11 +135,19 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="80" green="80" id="gray" palette="1" red="80" type="palette"/>
         </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Ubuntu" size="24" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Salir"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JButtonSalirActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Benjamin de Jesus Perez Aguiar "/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

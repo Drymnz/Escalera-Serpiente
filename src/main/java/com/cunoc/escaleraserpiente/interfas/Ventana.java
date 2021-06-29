@@ -49,7 +49,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     public void irMenuPrincipal() {
-        this.setSize(400, 620);
+        this.setSize(338, 620);
         carpeta.show(JPanelBase, "MenuPrincipal");
         SwingUtilities.updateComponentTreeUI(this);
         this.repaint();

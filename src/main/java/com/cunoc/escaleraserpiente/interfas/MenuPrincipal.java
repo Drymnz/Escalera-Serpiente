@@ -35,6 +35,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         JButtonRegistrarUsuario = new javax.swing.JButton();
         JButtonReportes = new javax.swing.JButton();
         JButtonSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(45, 214, 233));
 
@@ -47,9 +48,10 @@ public class MenuPrincipal extends javax.swing.JPanel {
             }
         });
 
-        JLabelLogo.setText("Juego serpiente y escalera");
+        JLabelLogo.setIcon(new javax.swing.ImageIcon("/home/drymnz/NetBeansProjects/EscaleraSerpiente/src/main/resources/path54.png")); // NOI18N
 
         JButtonCargarPartica.setBackground(java.awt.Color.gray);
+        JButtonCargarPartica.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonCargarPartica.setText("Cargar Partica");
         JButtonCargarPartica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,6 +60,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         JButtonRegistrarUsuario.setBackground(java.awt.Color.gray);
+        JButtonRegistrarUsuario.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonRegistrarUsuario.setText("Registrar Usuario");
         JButtonRegistrarUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +69,7 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         JButtonReportes.setBackground(java.awt.Color.gray);
+        JButtonReportes.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonReportes.setText("Reportes");
         JButtonReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,12 +78,15 @@ public class MenuPrincipal extends javax.swing.JPanel {
         });
 
         JButtonSalir.setBackground(java.awt.Color.gray);
+        JButtonSalir.setFont(new java.awt.Font("Ubuntu", 0, 24)); // NOI18N
         JButtonSalir.setText("Salir");
         JButtonSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButtonSalirActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Benjamin de Jesus Perez Aguiar ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,24 +96,26 @@ public class MenuPrincipal extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(JLabelLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(JButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JButtonCargarPartica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JButtonRegistrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                            .addComponent(JButtonReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(JButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 96, Short.MAX_VALUE)))
+                        .addComponent(JLabelLogo)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(JButtonJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonCargarPartica, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonRegistrarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(JButtonReportes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(JButtonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(JLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(JLabelLogo, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(JButtonJugar)
                 .addGap(18, 18, 18)
                 .addComponent(JButtonCargarPartica)
@@ -116,7 +125,8 @@ public class MenuPrincipal extends javax.swing.JPanel {
                 .addComponent(JButtonReportes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JButtonSalir)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -153,5 +163,6 @@ public class MenuPrincipal extends javax.swing.JPanel {
     private javax.swing.JButton JButtonReportes;
     private javax.swing.JButton JButtonSalir;
     private javax.swing.JLabel JLabelLogo;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

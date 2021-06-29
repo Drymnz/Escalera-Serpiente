@@ -27,6 +27,12 @@ public class ManejoGuardarPartida implements Runnable {
         this.tablero = tablero;
         this.listado = listado;
         crearMatrizGuia(tablero.getFila(), tablero.getColumna());
+        escribirUsuario();
+    }
+    private void escribirUsuario(){
+        for (int i = 0; i < listado.length; i++) {
+            escribir += "Usuario "+listado[i].getId()+".usuario\n";
+        }
     }
 
     private void crearMatrizGuia(int fila, int columna) {

@@ -66,15 +66,16 @@ public class ManejoCargaPartida {
     }
 
     private void completarCasillas() {
+        tableroFinal = new Tablero(listado, fila, columna, null, 0, Color.gray, null);
         int contador = tableroFinal.getFila() * tableroFinal.getColumna();
         listado = new Casilla[contador];
-        listado[listado.length - 1] = new Casilla((fila * columna), null, new Color(234, 190, 63));
-        for (int i = 0; i < tableroFinal.getFila(); i++) {
-            for (int j = 0; j < tableroFinal.getColumna(); j++) {
+        
+        for (int i = 0; i < fila; i++) {
+            for (int j = 0; j < columna; j++) {
                 if (casillas[i][j] == null) {
-                    listado[contador] = new Casilla(contador, Color.green);
+                    listado[contador-1] = new Casilla(contador, Color.green);
                 } else {
-                    listado[contador] = casillas[i][j];
+                    listado[contador-1] = casillas[i][j];
                 }
                 contador--;
             }
@@ -88,61 +89,71 @@ public class ManejoCargaPartida {
         try {
             switch (ver[0]) {
                 case "tablero":
-                    String[] numerotablero = ver[0].split(",");
+                    String[] numerotablero = ver[1].split("\\,");
                     int fila = Integer.parseInt(numerotablero[0]);
                     int columna = Integer.parseInt(numerotablero[1]);
                     this.casillas = new Casilla[fila][columna];
+                    this.fila = fila;
+                    this.columna = columna;
                     crearMatrizGuia(fila, columna);
                     break;
                 case "pierdeturno":
-                    String[] numeropierdeturno = ver[0].split(",");
+                    String[] numeropierdeturno =ver[1].split("\\,");
                     int filaNumeropierdeturno = Integer.parseInt(numeropierdeturno[0]);
                     int columnaNumeropierdeturno = Integer.parseInt(numeropierdeturno[1]);
                     this.casillas[filaNumeropierdeturno][columnaNumeropierdeturno] = new PierdeTurno(matrizGuia[filaNumeropierdeturno][columnaNumeropierdeturno]);
                     break;
                 case "tiradados":
-                    String[] numerotiradados = ver[0].split(",");
+                    String[] numerotiradados =ver[1].split("\\,");
                     int filanumerotiradados = Integer.parseInt(numerotiradados[0]);
                     int columnanumerotiradados = Integer.parseInt(numerotiradados[1]);
                     this.casillas[filanumerotiradados][columnanumerotiradados] = new NuevoTrueno(matrizGuia[filanumerotiradados][columnanumerotiradados]);
                     break;
                 case "avanza":
-                    String[] numeroavanza = ver[0].split(",");
+                    String[] numeroavanza = ver[1].split("\\,");
                     int filanumeroavanza = Integer.parseInt(numeroavanza[0]);
                     int columnanumeroavanza = Integer.parseInt(numeroavanza[1]);
-                    int avancenumeroavanza = Integer.parseInt(numeroavanza[3]);
+                    int avancenumeroavanza = Integer.parseInt(numeroavanza[2]);
                     this.casillas[filanumeroavanza][columnanumeroavanza] = new AvanzarMas(matrizGuia[filanumeroavanza][columnanumeroavanza], avancenumeroavanza);
                     break;
                 case "retrocede":
-                    String[] numeroretrocede = ver[0].split(",");
+                    String[] numeroretrocede =ver[1].split("\\,");
                     int filanumeroretrocede = Integer.parseInt(numeroretrocede[0]);
                     int columnanumeroretrocede = Integer.parseInt(numeroretrocede[1]);
-                    int avancenumeroretrocede = Integer.parseInt(numeroretrocede[3]);
+                    int avancenumeroretrocede = Integer.parseInt(numeroretrocede[2]);
                     this.casillas[filanumeroretrocede][columnanumeroretrocede] = new RetrocederCasilla(matrizGuia[filanumeroretrocede][columnanumeroretrocede], avancenumeroretrocede);
                     break;
                 case "subida":
-                    String[] numerosubida = ver[0].split(",");
+                    String[] numerosubida = ver[1].split("\\,");
                     int filanumerosubida = Integer.parseInt(numerosubida[0]);
                     int columnanumerosubida = Integer.parseInt(numerosubida[1]);
-                    int filaDosnumerosubida = Integer.parseInt(numerosubida[3]);
-                    int columnaDosnumerosubida = Integer.parseInt(numerosubida[4]);
-                    this.casillas[filanumerosubida][columnanumerosubida] = new Escalera(matrizGuia[filanumerosubida][columnanumerosubida], this.casillas[filaDosnumerosubida][columnaDosnumerosubida]);
+                    int filaDosnumerosubida = Integer.parseInt(numerosubida[2]);
+                    int columnaDosnumerosubida = Integer.parseInt(numerosubida[3]);
+                    Escalera colocar = new Escalera(matrizGuia[filaDosnumerosubida][columnaDosnumerosubida]);
+                    this.casillas[filaDosnumerosubida][columnaDosnumerosubida] = colocar;
+                    this.casillas[filanumerosubida][columnanumerosubida] = new Escalera(matrizGuia[filanumerosubida][columnanumerosubida], colocar);
                     break;
                 case "bajada":
-                    String[] numerobajada = ver[0].split(",");
+                    String[] numerobajada =ver[1].split("\\,");
                     int filanumerobajada = Integer.parseInt(numerobajada[0]);
                     int columnanumerobajada = Integer.parseInt(numerobajada[1]);
-                    int filaDosnumerobajada = Integer.parseInt(numerobajada[3]);
-                    int columnaDosnumerobajada = Integer.parseInt(numerobajada[4]);
+                    int filaDosnumerobajada = Integer.parseInt(numerobajada[2]);
+                    int columnaDosnumerobajada = Integer.parseInt(numerobajada[3]);
                     this.casillas[filanumerobajada][columnanumerobajada] = new Serpiente(matrizGuia[filanumerobajada][columnanumerobajada], this.casillas[filaDosnumerobajada][columnaDosnumerobajada]);
+                    break;
+                case "null":
+                    break;
+                case "":
                     break;
             }
         } catch (Exception e) {
+            System.out.println("e>>>>>>>>>> no cargo " +ver[0]+ver[1]+">>>>"+e.getMessage());
         }
     }
 
     private void crearMatrizGuia(int fila, int columna) {
         int contador = fila * columna;
+        matrizGuia = new int[fila][columna];
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
                 matrizGuia[i][j] = contador;

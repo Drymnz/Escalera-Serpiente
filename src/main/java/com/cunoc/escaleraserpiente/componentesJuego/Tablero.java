@@ -36,8 +36,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.casillasSimples = casillasSimples;
         this.ganadorUsuario = ganadorUsuario;
         initComponents();
-        this.setLayout(new GridLayout(fila, columna));
-        cargar();
     }
 
     public Tablero(int columna, int fila) {
@@ -52,7 +50,8 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     }
     //final  Creates new form Tablero
 
-    private void cargar() {
+    public void cargar() {
+        this.setLayout(new GridLayout(fila, columna));
         for (int i = 0; i < listado.length; i++) {
             this.add(listado[i]);
         }
@@ -121,6 +120,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         }
         return asignarTipo;
     }
+
     private void moverFicha() {
         if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() < (fila * columna)) && (fichaEnMovimiento.getUbicacion().getId() > (-1))) {
             int mover = (pasosMoverFicha > 0) ? 1 : -1;

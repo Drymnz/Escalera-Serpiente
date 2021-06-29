@@ -9,7 +9,10 @@ import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoEscrituraLectura;
 import com.cunoc.escaleraserpiente.Start;
 import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.componentesJuego.PantallaDelJuego;
+import com.cunoc.escaleraserpiente.componentesJuego.Tablero;
+import com.cunoc.escaleraserpiente.guardarPartidaCargar.ManejoCargaPartida;
 import java.io.File;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -108,7 +111,7 @@ public class MenuJuego extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(72, 210, 217));
 
-        JButtonMenuPrincipal.setText("Menu Principal");
+        JButtonMenuPrincipal.setText("Menu ");
         JButtonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButtonMenuPrincipalActionPerformed(evt);
@@ -176,7 +179,7 @@ public class MenuJuego extends javax.swing.JPanel {
             }
         });
 
-        JButtonListadoJugadores.setText("Actualizar listado jugadores");
+        JButtonListadoJugadores.setText("Actulizar listado");
         JButtonListadoJugadores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 JButtonListadoJugadoresActionPerformed(evt);
@@ -190,23 +193,23 @@ public class MenuJuego extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(JButtonIniciar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(JButtonAgregarJugador)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(JButtonEliminarJugador))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(JButtonMenuPrincipal)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(JButtonListadoJugadores)))
-                .addContainerGap())
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(JButtonIniciar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 319, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(JButtonMenuPrincipal)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(JButtonListadoJugadores, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,7 +280,22 @@ public class MenuJuego extends javax.swing.JPanel {
     private void JButtonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JButtonIniciarActionPerformed
         // TODO add your handling code here:
         if (contadorJugadores > 1) {
+            int realizar = 0;
+            do {
+                realizar = JOptionPane.showConfirmDialog(null, "¿Desea cargar una tabla?");
+            } while (realizar == 2 || realizar == -1);
             PantallaDelJuego nuevaPartida = new PantallaDelJuego(10, 10, listadoJugadores, contadorJugadores);
+            if (realizar == 0) {
+                JFileChooser Buscador = new JFileChooser();
+                File ver = null;
+                do {
+                    Buscador.showOpenDialog(null);
+                    ver = Buscador.getSelectedFile();
+                } while (!(ver.canRead()) || !ver.getName().endsWith("txt"));
+                Tablero nuevo = (new ManejoCargaPartida(ver)).getTerminado();
+                nuevaPartida.setTablero1(nuevo);
+                nuevo.cargar();
+            }
             Start.ejecutar.jugar(nuevaPartida);
         } else {
             JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");

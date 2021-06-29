@@ -345,4 +345,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         }
     }
 
+    public void setTablero1(Tablero tablero1) {
+        this.tablero1 = tablero1;
+    }
+
 }

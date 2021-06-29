@@ -17,14 +17,14 @@ import java.awt.Graphics;
  */
 public class Escalera extends Casilla {
 
-    private Casilla subir;
+    private Escalera subir;
 
-    public Escalera(int id, Ficha ficha, Color color, Casilla subir) {
+    public Escalera(int id, Ficha ficha, Color color, Escalera subir) {
         super(id, ficha, color);
         this.subir = subir;
     }
 
-    public Escalera(int id,Casilla subir) {
+    public Escalera(int id,Escalera subir) {
         this(WIDTH, null,Color.WHITE, subir);
         this.subir = subir;
     }
@@ -41,11 +41,11 @@ public class Escalera extends Casilla {
         g.drawString("|--|", 10, this.getHeight());
     }
 
-    public Casilla getSubir() {
+    public Escalera getSubir() {
         return subir;
     }
 
-    public void setSubir(Casilla subir) {
+    public void setSubir(Escalera subir) {
         this.subir = subir;
     }
     

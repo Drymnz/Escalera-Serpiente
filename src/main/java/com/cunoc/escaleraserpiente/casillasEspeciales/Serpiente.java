@@ -33,4 +33,9 @@ public class Serpiente extends Casilla{
         g.setFont(new Font("Time new Roman", Font.PLAIN, this.getHeight()));
         g.drawString(" |-|", 10, this.getHeight());
     }
+
+    public Casilla getCola() {
+        return cola;
+    }
+    
 }

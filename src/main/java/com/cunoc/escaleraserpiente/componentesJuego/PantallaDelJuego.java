@@ -330,6 +330,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         reglas.aplicarRegla(listadoFichas[turno]);
         turno = reglas.getTurno();
         Registro.setText(reglas.getMencionar());
+        System.out.println("turno>>>>>>>>><"+turno);
         turnoAcutal.turnoDe(listadoFichas[turno]);
         if (tablero1.getGanadorUsuario() != null) {
             hiloCronometro.stop();

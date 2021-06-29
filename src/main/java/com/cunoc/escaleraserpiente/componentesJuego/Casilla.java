@@ -68,4 +68,8 @@ public  class Casilla extends JPanel {
         this.ficha = ficha;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

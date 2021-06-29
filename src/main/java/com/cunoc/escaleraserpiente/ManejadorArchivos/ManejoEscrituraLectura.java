@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
 
 /**
  *
@@ -55,7 +56,11 @@ public class ManejoEscrituraLectura {
     public void escribirArchivoTexto(String textoEscrivir, File donde) {
         try {
             FileWriter escritor = new FileWriter(donde);
-            escritor.write(textoEscrivir);
+            PrintWriter mano = new PrintWriter(escritor);
+            System.out.println(textoEscrivir);
+            mano.println(textoEscrivir);
+            mano.close();
+            escritor.close();
         } catch (IOException e) {
         }
 

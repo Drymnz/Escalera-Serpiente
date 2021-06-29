@@ -35,7 +35,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.pasosMoverFicha = pasosMoverFicha;
         this.casillasSimples = casillasSimples;
         this.ganadorUsuario = ganadorUsuario;
-         initComponents();
+        initComponents();
         this.setLayout(new GridLayout(fila, columna));
         cargar();
     }
@@ -44,7 +44,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.fila = fila;
         this.columna = columna;
         initComponents();
-        this.setLayout(new GridLayout(fila, columna));
     }
 
     public Tablero() {
@@ -53,11 +52,12 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     }
     //final  Creates new form Tablero
 
-    private void cargar(){
+    private void cargar() {
         for (int i = 0; i < listado.length; i++) {
             this.add(listado[i]);
         }
     }
+
     @Override
     public void paint(Graphics g) {
         super.paint(g); //To change body of generated methods, choose Tools | Templates.
@@ -65,15 +65,21 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     }
 
     public void botones(int columna, int fila) {
+        this.setLayout(new GridLayout(fila, columna));
         this.fila = fila;
         this.columna = columna;
         this.listado = new Casilla[columna * fila];
-        
+
         listado[listado.length - 1] = new Casilla((fila * columna), null, new Color(234, 190, 63));// casilla victoria
         this.add(listado[listado.length - 1]);
         for (int i = (listado.length - 2); i >= 0; i--) {
-            listado[i] = asignarTipo(i + 1);
-            this.add(listado[i]);
+            if (listado[i] == null) {
+                listado[i] = asignarTipo(i + 1);
+                this.add(listado[i]);
+            } else {
+                listado[i].setId((i + 1));
+                this.add(listado[i]);
+            }
         }
     }
 
@@ -86,7 +92,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 break;
             case 2:// CASILLA SERPIENTE  10
                 if (2 * columna < id) {
-                    asignarTipo = new Serpiente(id);
+                    asignarTipo = new Serpiente(id, (buscarCasillaCola(id, false)));
                 } else {
                     asignarTipo = new Casilla(id, casillasSimples);
                 }
@@ -111,17 +117,15 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         return asignarTipo;
     }
 
-    private Casilla buscarCasillaCola(int id) {
-        int rando = (int) (Math.random() * fila) + 8;
+    private Casilla buscarCasillaCola(int id, boolean mayorMeno) {
+        int rando = mayorMeno? (int) (Math.random() * fila) + fila :(int) (Math.random() * id) - fila;
         Casilla dar = null;
         do {
-            rando = (int) (Math.random() * fila) + 8;
-            if (rando >= 0 && rando < fila * columna) {
-                for (int i = 0; i < listado.length; i++) {
-                    if (listado[rando].getId() < id) {
-                        return listado[i];
-                    }
-                }
+            rando = mayorMeno? (int) (Math.random() * fila) + fila :(int) (Math.random() * id) - fila;
+            if (rando >= 0 && rando < fila * columna && ((mayorMeno) ? (rando > id) : (rando < id))) {
+                dar = new Casilla(rando, casillasSimples);
+                listado[rando] = dar;
+                return dar;
             }
         } while (rando >= 0 && rando < fila * columna);
         return listado[0];

@@ -40,4 +40,13 @@ public class Escalera extends Casilla {
         g.setFont(new Font("Time new Roman", Font.PLAIN, this.getHeight()));
         g.drawString("|--|", 10, this.getHeight());
     }
+
+    public Casilla getSubir() {
+        return subir;
+    }
+
+    public void setSubir(Casilla subir) {
+        this.subir = subir;
+    }
+    
 }

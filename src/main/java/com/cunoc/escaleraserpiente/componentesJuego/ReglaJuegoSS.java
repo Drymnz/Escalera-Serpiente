@@ -43,6 +43,9 @@ public class ReglaJuegoSS {
         boolean repetriTruno = false;
         switch ((ficha.getUbicacion() instanceof Serpiente) ? 1 : (ficha.getUbicacion() instanceof RetrocederCasilla) ? 2 : (ficha.getUbicacion() instanceof PierdeTurno) ? 3 : (ficha.getUbicacion() instanceof NuevoTrueno) ? 4 : (ficha.getUbicacion() instanceof Escalera) ? 5 : (ficha.getUbicacion() instanceof AvanzarMas) ? 6 : 7) {
             case 1:// CASILLA SERPIENTE 
+                Serpiente verSerpiente = (Serpiente) ficha.getUbicacion();
+                ficha.setUbicacion(verSerpiente.getCola());
+                verSerpiente.getCola().setFicha(ficha);
                 mencionar = ver.getUsuario().getNombre() + " bajara a la cola de la serpiente";
                 break;
             case 2:// CASILLA RetrocederCasilla 
@@ -61,6 +64,10 @@ public class ReglaJuegoSS {
                 mencionar = ver.getUsuario().getNombre() + " tirar nuevamente";
                 break;
             case 5:// CASILLA Escalera
+                Escalera verEscalera = (Escalera) ficha.getUbicacion();
+                ficha.setUbicacion(verEscalera.getSubir());
+                System.out.println("verEscalera.getSubir()"+verEscalera.getSubir().toString());
+                verEscalera.getSubir().setFicha(ficha);
                 mencionar = ver.getUsuario().getNombre() + " subira";
                 break;
             case 6:// CASILLA AvanzarMas

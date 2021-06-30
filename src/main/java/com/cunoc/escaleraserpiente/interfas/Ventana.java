@@ -6,8 +6,7 @@
 package com.cunoc.escaleraserpiente.interfas;
 
 import com.cunoc.escaleraserpiente.ManejadorArchivos.ManejoCarga;
-import com.cunoc.escaleraserpiente.Usuario.MenuReporte;
-import com.cunoc.escaleraserpiente.Usuario.Registrar;
+import com.cunoc.escaleraserpiente.Usuario.*;
 import com.cunoc.escaleraserpiente.componentesJuego.PantallaDelJuego;
 import java.awt.CardLayout;
 import java.io.File;

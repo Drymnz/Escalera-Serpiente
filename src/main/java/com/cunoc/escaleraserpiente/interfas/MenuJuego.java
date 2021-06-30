@@ -11,8 +11,10 @@ import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.componentesJuego.PantallaDelJuego;
 import com.cunoc.escaleraserpiente.componentesJuego.Tablero;
 import com.cunoc.escaleraserpiente.guardarPartidaCargar.ManejoCargaPartida;
+import java.awt.Color;
 import java.io.File;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -284,7 +286,7 @@ public class MenuJuego extends javax.swing.JPanel {
             do {
                 realizar = JOptionPane.showConfirmDialog(null, "¿Desea cargar una tabla?");
             } while (realizar == 2 || realizar == -1);
-            PantallaDelJuego nuevaPartida = new PantallaDelJuego(10, 10, listadoJugadores, contadorJugadores);
+
             if (realizar == 0) {
                 JFileChooser Buscador = new JFileChooser();
                 File ver = null;
@@ -293,12 +295,13 @@ public class MenuJuego extends javax.swing.JPanel {
                     ver = Buscador.getSelectedFile();
                 } while (!(ver.canRead()) || !ver.getName().endsWith("txt"));
                 Tablero nuevo = (new ManejoCargaPartida(ver)).getTerminado();
-                PantallaDelJuego nuevaPartidaCon = new PantallaDelJuego(nuevo.getFila(), nuevo.getColumna(), listadoJugadores, contadorJugadores, nuevo);
-                nuevaPartidaCon.cargarTablero();
-                //Start.ejecutar.jugar(nuevaPartidaCon);
-                //nuevaPartidaCon.cargarTablero();
+                nuevo.cargar();
+                PantallaDelJuego nuevaPartida = new PantallaDelJuego(nuevo.getFila(), nuevo.getColumna(), listadoJugadores, contadorJugadores, nuevo);
+                Start.ejecutar.jugar(nuevaPartida);
+            } else {
+                PantallaDelJuego nuevaPartida = new PantallaDelJuego(10, 10, listadoJugadores, contadorJugadores);
+                Start.ejecutar.jugar(nuevaPartida);
             }
-            Start.ejecutar.jugar(nuevaPartida);
 
         } else {
             JOptionPane.showMessageDialog(null, "Porfarvor selecciones el jugador,NOTA: HASTA QUE ESTE CAMBIE DE COLOR EN EL LISTADO DE JUGADORES ");

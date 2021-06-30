@@ -44,8 +44,8 @@ public class ReglaJuegoSS {
         switch ((ficha.getUbicacion() instanceof Serpiente) ? 1 : (ficha.getUbicacion() instanceof RetrocederCasilla) ? 2 : (ficha.getUbicacion() instanceof PierdeTurno) ? 3 : (ficha.getUbicacion() instanceof NuevoTrueno) ? 4 : (ficha.getUbicacion() instanceof Escalera) ? 5 : (ficha.getUbicacion() instanceof AvanzarMas) ? 6 : 7) {
             case 1:// CASILLA SERPIENTE 
                 Serpiente verSerpiente = (Serpiente) ficha.getUbicacion();
-                int numero = (int) (Math.random() * 3) + 1;
-                tablero.setPasosMoverFicha(-8 * numero);
+                int numero = verSerpiente.getId() - verSerpiente.getCola().getId();
+                tablero.setPasosMoverFicha(-1 * numero);
                 new Thread(tablero).start();
                 mencionar = ver.getUsuario().getNombre() + " bajara a la cola de la serpiente";
                 break;
@@ -66,8 +66,8 @@ public class ReglaJuegoSS {
                 break;
             case 5:// CASILLA Escalera
                 Escalera verEscalera = (Escalera) ficha.getUbicacion();
-                int numeroDos = (int) (Math.random() * 3) + 1;
-                tablero.setPasosMoverFicha(8 * numeroDos);
+                int numeroDos = verEscalera.getSubir().getId() - verEscalera.getId();
+                tablero.setPasosMoverFicha(numeroDos);
                 new Thread(tablero).start();
                 mencionar = ver.getUsuario().getNombre() + " subira";
                 break;

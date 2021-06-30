@@ -73,10 +73,7 @@ public class ReglaJuegoSS {
             case 5:// CASILLA Escalera
                 Escalera verEscalera = (Escalera) ficha.getUbicacion();
                 if (verEscalera.getSubir() != null) {
-                    int numeroDos = verEscalera.getSubir().getId() - verEscalera.getId();
-                    System.out.println("verEscalera.getSubir().getId()>>>>><"+verEscalera.getSubir().getId());
-                    System.out.println("verEscalera.getId()"+verEscalera.getId());
-                    System.out.println("numeroDos"+numeroDos);
+                    int numeroDos = verEscalera.getId()  - verEscalera.getSubir().getId();
                     tablero.setPasosMoverFicha(numeroDos);
                     new Thread(tablero).start();
                     mencionar = ver.getUsuario().getNombre() + "subira";

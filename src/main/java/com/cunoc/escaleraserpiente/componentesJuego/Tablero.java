@@ -118,7 +118,9 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 break;
             case 6:// CASILLA Escalera 10
                 if (id < ((fila * columna) - (2 * columna))) {
-                    asignarTipo = new Escalera(id, (Escalera) bajadaSubidad(id, true));
+                    asignarTipo = new Escalera(id);
+                    Escalera subidaBajada = (Escalera) bajadaSubidad(id, true);
+                    subidaBajada.setSubir((Escalera) asignarTipo);
                 } else {
                     asignarTipo = new Casilla(id, casillasSimples);
                 }
@@ -153,9 +155,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                     fichaEnMovimiento.setUbicacion(listado[resutlado]);
                     listado[resutlado].setFicha(fichaEnMovimiento);
                     ubicacionAcutalDeLaFicha.setFicha(null);
-                } else {
-                    fichaEnMovimiento.setUbicacion(listado[0]);
-                    listado[0].setFicha(fichaEnMovimiento);
                 }
             }
         } else {

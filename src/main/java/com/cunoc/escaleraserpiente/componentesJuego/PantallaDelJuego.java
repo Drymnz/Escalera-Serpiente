@@ -11,9 +11,7 @@ import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.guardarPartidaCargar.ManejoGuardarPartida;
 import java.awt.Color;
 import java.io.File;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -35,6 +33,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
      */
     public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores) {
         initComponents();
+        tableroSS.remove(JPanelPruevas);
         this.CantidadDeJugadores = CantidadDeJugadores;
         turnoAcutal.setDado(dado);
         hiloCronometro = new Thread(cronometro1);
@@ -42,25 +41,26 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         this.fila = fila;
         this.columna = columna;
         jugadores(listado);
-        tablero1.botones(fila, columna);
-        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
-
+        tableroSS.botones(fila, columna);
+        reglas = new ReglaJuegoSS(listadoFichas, tableroSS, CantidadDeJugadores, turno);
     }
 
     public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores, Tablero tablero) {
         initComponents();
-        this.tablero1 = tablero;
         this.CantidadDeJugadores = CantidadDeJugadores;
-        this.columna = columna;
-        this.fila = fila;
-
-        jugadores(listado);
-        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
-
         turnoAcutal.setDado(dado);
         hiloCronometro = new Thread(cronometro1);
         hiloCronometro.start();
-        
+        this.columna = columna;
+        this.fila = fila;
+        jugadores(listado);
+        this.tableroSS = tablero;
+        tablero.cargar();
+        reglas = new ReglaJuegoSS(listadoFichas, tableroSS, CantidadDeJugadores, turno);
+        JPanelPruevas.setBackground(Color.red);
+        tablero.setBounds(0, 0, 980, 635);
+        JPanelPruevas.add(tablero);
+
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -76,8 +76,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     }
 
     public void cargarTablero() {
-        tablero1.removeAll();
-        tablero1.cargar();
+        tableroSS.removeAll();
+        tableroSS.cargar();
         this.repaint();
     }
 
@@ -142,7 +142,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         cronometro1 = new com.cunoc.escaleraserpiente.Cronometro.Cronometro();
         jButton1 = new javax.swing.JButton();
         Registro = new javax.swing.JLabel();
-        tablero1 = new com.cunoc.escaleraserpiente.componentesJuego.Tablero();
+        tableroSS = new com.cunoc.escaleraserpiente.componentesJuego.Tablero();
+        JPanelPruevas = new javax.swing.JPanel();
 
         jPanel1.setBackground(new java.awt.Color(177, 193, 118));
 
@@ -267,17 +268,32 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
                 .addContainerGap())
         );
 
-        tablero1.setBackground(new java.awt.Color(149, 237, 44));
-
-        javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
-        tablero1.setLayout(tablero1Layout);
-        tablero1Layout.setHorizontalGroup(
-            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1024, Short.MAX_VALUE)
+        javax.swing.GroupLayout JPanelPruevasLayout = new javax.swing.GroupLayout(JPanelPruevas);
+        JPanelPruevas.setLayout(JPanelPruevasLayout);
+        JPanelPruevasLayout.setHorizontalGroup(
+            JPanelPruevasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1000, Short.MAX_VALUE)
         );
-        tablero1Layout.setVerticalGroup(
-            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        JPanelPruevasLayout.setVerticalGroup(
+            JPanelPruevasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout tableroSSLayout = new javax.swing.GroupLayout(tableroSS);
+        tableroSS.setLayout(tableroSSLayout);
+        tableroSSLayout.setHorizontalGroup(
+            tableroSSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tableroSSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JPanelPruevas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        tableroSSLayout.setVerticalGroup(
+            tableroSSLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tableroSSLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(JPanelPruevas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -286,7 +302,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tableroSS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -296,7 +312,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tableroSS, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -314,12 +330,13 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Start.ejecutar.irMenuPrincipal();
-        new Thread(new ManejoGuardarPartida(tablero1, listado)).start();
+        new Thread(new ManejoGuardarPartida(tableroSS, listado)).start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonLanzar;
+    private javax.swing.JPanel JPanelPruevas;
     private javax.swing.JTable JTableLIstadoJugadores;
     private javax.swing.JLabel Registro;
     private com.cunoc.escaleraserpiente.Cronometro.Cronometro cronometro1;
@@ -329,13 +346,13 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.cunoc.escaleraserpiente.componentesJuego.Tablero tablero1;
+    private com.cunoc.escaleraserpiente.componentesJuego.Tablero tableroSS;
     private com.cunoc.escaleraserpiente.componentesJuego.TurnoAcutal turnoAcutal;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void run() {
-        tablero1.setFichaEnMovimiento(listadoFichas[turno]);
+        tableroSS.setFichaEnMovimiento(listadoFichas[turno]);
         new Thread(dado).start();
         do {
             try {
@@ -344,9 +361,9 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             }
         } while (!dado.isDisponible());
         int pasos = dado.getNumeroSalio();
-        tablero1.setFichaEnMovimiento(listadoFichas[turno]);
-        tablero1.setPasosMoverFicha(pasos);
-        Thread p = new Thread(tablero1);
+        tableroSS.setFichaEnMovimiento(listadoFichas[turno]);
+        tableroSS.setPasosMoverFicha(pasos);
+        Thread p = new Thread(tableroSS);
         p.start();
         while (p.isAlive()) {
             try {
@@ -362,10 +379,10 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         Registro.setText(reglas.getMencionar());
         turnoAcutal.turnoDe(listadoFichas[turno]);
 
-        if ((listadoFichas[turno].getUbicacion() != null && listadoFichas[turno].getUbicacion().getId() > fila * columna) || tablero1.getGanadorUsuario() != null) {
+        if ((listadoFichas[turno].getUbicacion() != null && listadoFichas[turno].getUbicacion().getId() > fila * columna) || tableroSS.getGanadorUsuario() != null) {
             hiloCronometro.stop();
             for (int i = 0; i < listado.length; i++) {
-                if (listado[i] == tablero1.getGanadorUsuario()) {
+                if (listado[i] == tableroSS.getGanadorUsuario()) {
                     listado[i].setVictoria(listado[i].getVictoria() + 1);
                 } else {
                     listado[i].setPerdida(listado[i].getPerdida() + 1);
@@ -375,9 +392,6 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             }
             Start.ejecutar.irMenuPrincipal();
         }
-    }
-    public void setTablero1(Tablero tablero1) {
-        this.tablero1 = tablero1;
     }
 
 }

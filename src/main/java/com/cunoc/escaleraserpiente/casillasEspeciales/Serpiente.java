@@ -16,13 +16,13 @@ import java.awt.Graphics;
  * @author drymnz
  */
 public class Serpiente extends Casilla{
-    private Casilla cola;
+    private Serpiente cola;
     
-    public Serpiente(int id, Ficha ficha, Color color,Casilla cola) {
+    public Serpiente(int id, Ficha ficha, Color color,Serpiente cola) {
         super(id, ficha, color);
         this.cola = cola;
     }
-    public Serpiente(int id,Casilla cola) {
+    public Serpiente(int id,Serpiente cola) {
         this(id, null, Color.WHITE,cola);
     }
     public Serpiente(int id) {

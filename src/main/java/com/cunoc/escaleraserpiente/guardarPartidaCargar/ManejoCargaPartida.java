@@ -139,7 +139,7 @@ public class ManejoCargaPartida {
                     int columnanumerobajada = Integer.parseInt(numerobajada[1]);
                     int filaDosnumerobajada = Integer.parseInt(numerobajada[2]);
                     int columnaDosnumerobajada = Integer.parseInt(numerobajada[3]);
-                    this.casillas[filanumerobajada][columnanumerobajada] = new Serpiente(matrizGuia[filanumerobajada][columnanumerobajada], this.casillas[filaDosnumerobajada][columnaDosnumerobajada]);
+                    this.casillas[filanumerobajada][columnanumerobajada] = new Serpiente(matrizGuia[filanumerobajada][columnanumerobajada], (Serpiente) this.casillas[filaDosnumerobajada][columnaDosnumerobajada]);
                     break;
                 case "null":
                     break;

@@ -12,7 +12,6 @@ import com.cunoc.escaleraserpiente.casillasEspeciales.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -93,7 +92,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private Casilla asignarTipo(int id) {
         int aletorio = (int) (Math.random() * 100);
         Casilla asignarTipo = null;
-        switch ((aletorio > 60) ? 1 : (aletorio > 50) ? 2 : (aletorio > 40) ? 3 : (aletorio > 30) ? 4 : (aletorio > 20) ? 5 : (aletorio > 10) ? 6 : 7) {
+        switch ((aletorio > 60) ? 1 : (aletorio > 50) ? 2 : (aletorio > 40) ? 3 : (aletorio > 35) ? 4 : (aletorio > 20) ? 5 : (aletorio > 10) ? 6 : 7) {
             case 1:// CASILLA SIMPLE 
                 asignarTipo = new Casilla(id, casillasSimples);
                 break;
@@ -111,15 +110,15 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 asignarTipo = new AvanzarMas(id);
                 break;
             case 2:// CASILLA SERPIENTE  10
-                if (2 * columna < id) {
-                    asignarTipo = new Serpiente(id);
+                if ((id > columna * 2)) {
+                    asignarTipo = new Serpiente(id, (Serpiente) bajadaSubidad(id, false));
                 } else {
                     asignarTipo = new Casilla(id, casillasSimples);
                 }
                 break;
             case 6:// CASILLA Escalera 10
                 if (id < ((fila * columna) - (2 * columna))) {
-                    asignarTipo = new Escalera(id);
+                    asignarTipo = new Escalera(id, (Escalera) bajadaSubidad(id, true));
                 } else {
                     asignarTipo = new Casilla(id, casillasSimples);
                 }
@@ -129,29 +128,35 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         return asignarTipo;
     }
 
+    private Casilla bajadaSubidad(int id, boolean subidaBajadaid) {
+        int multiplicador = (int) (Math.random() * (fila - 1)) + 1;
+        int nuevoId = (subidaBajadaid) ? (id + (8 * multiplicador)) : id - (8 * multiplicador);
+        while (nuevoId > (fila * columna) || nuevoId < 0) {
+            multiplicador = (int) (Math.random() * (fila - 1)) + 1;
+            nuevoId = (subidaBajadaid) ? (id + (8 * multiplicador)) : id - (8 * multiplicador);
+        }
+        Casilla subidaBajada = (subidaBajadaid) ? new Escalera(nuevoId) : new Serpiente(nuevoId);
+        listado[nuevoId - 1] = subidaBajada;
+        return listado[nuevoId - 1];
+    }
+
     private void moverFicha() {
-        if ((fichaEnMovimiento != null) && (fichaEnMovimiento.getUbicacion() != null) && (fichaEnMovimiento.getUbicacion().getId() < (fila * columna)) && (fichaEnMovimiento.getUbicacion().getId() > (-1))) {
-            int mover = (pasosMoverFicha > 0) ? 1 : -1;
-            if ((fichaEnMovimiento.getUbicacion().getId() - 1) + 1 > (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) < (fila * columna) && ((fichaEnMovimiento.getUbicacion().getId() - 1) + mover) > 0) {
-                this.ganadorUsuario = fichaEnMovimiento.getUsuario();
-                Start.ejecutar.irMenuPrincipal();
-                for (int i = 0; i < listado.length; i++) {
-                    if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
-                        listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
-                    } else {
-                        listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
-                    }
-                    listado[i].getFicha().getUsuario().setCantidadPartidad(listado[i].getFicha().getUsuario().getCantidadPartidad() + 1);
-                    (new ManejoEscrituraLectura()).escribirArchivo(listado[i], new File(".Archivo/Usuario/" + listado[i].getId() + ".usuario"));
-                }
+        if (fichaEnMovimiento != null && fichaEnMovimiento.getUbicacion() != null) {
+            Casilla ubicacionAcutalDeLaFicha = fichaEnMovimiento.getUbicacion();
+            if (ubicacionAcutalDeLaFicha.getId() >= fila * columna) {
+                gano();
             } else {
-                if (fichaEnMovimiento.getUbicacion().getFicha() == fichaEnMovimiento) {
-                    fichaEnMovimiento.getUbicacion().setFicha(null);
+                int asiaDondeSeVaMover = (pasosMoverFicha > 0) ? 1 : -1;
+                int idAcutalDeLaFicha = ubicacionAcutalDeLaFicha.getId();
+                int resutlado = idAcutalDeLaFicha + asiaDondeSeVaMover - 1;
+                if (resutlado > 0) {
+                    fichaEnMovimiento.setUbicacion(listado[resutlado]);
+                    listado[resutlado].setFicha(fichaEnMovimiento);
+                    ubicacionAcutalDeLaFicha.setFicha(null);
+                } else {
+                    fichaEnMovimiento.setUbicacion(listado[0]);
+                    listado[0].setFicha(fichaEnMovimiento);
                 }
-                if (listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].getFicha() == null) {
-                    listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover].setFicha(fichaEnMovimiento);
-                }
-                fichaEnMovimiento.setUbicacion(listado[(fichaEnMovimiento.getUbicacion().getId() - 1) + mover]);
             }
         } else {
             fichaEnMovimiento.setUbicacion(listado[0]);
@@ -162,7 +167,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private void gano() {
         for (int i = 0; i < listado.length; i++) {
             if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
-                JOptionPane.showMessageDialog(null, "GAno>>>> " + ganadorUsuario.getId() + " Nombre >>>" + ganadorUsuario.getNombre());
+                JOptionPane.showMessageDialog(null, "GANO>>>> " + ganadorUsuario.getId() + " Nombre >>>" + ganadorUsuario.getNombre());
                 listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
             } else {
                 listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
@@ -198,11 +203,9 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
                 Thread.sleep(500);
             } catch (Exception e) {
             }
-            if (fichaEnMovimiento.getUbicacion() == null || (fichaEnMovimiento.getUbicacion() != null && fichaEnMovimiento.getUbicacion().getId() > 0 && fichaEnMovimiento.getUbicacion().getId() < ((fila * columna) + 1))) {
-                moverFicha();
-                if (fichaEnMovimiento.getUbicacion().getId() >= ((fila * columna))) {
-                    gano();
-                }
+            moverFicha();
+            if (fichaEnMovimiento.getUbicacion().getId() >= ((fila * columna))) {
+                gano();
             }
         }
     }

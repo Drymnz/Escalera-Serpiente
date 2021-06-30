@@ -44,10 +44,16 @@ public class ReglaJuegoSS {
         switch ((ficha.getUbicacion() instanceof Serpiente) ? 1 : (ficha.getUbicacion() instanceof RetrocederCasilla) ? 2 : (ficha.getUbicacion() instanceof PierdeTurno) ? 3 : (ficha.getUbicacion() instanceof NuevoTrueno) ? 4 : (ficha.getUbicacion() instanceof Escalera) ? 5 : (ficha.getUbicacion() instanceof AvanzarMas) ? 6 : 7) {
             case 1:// CASILLA SERPIENTE 
                 Serpiente verSerpiente = (Serpiente) ficha.getUbicacion();
-                int numero = verSerpiente.getId() - verSerpiente.getCola().getId();
-                tablero.setPasosMoverFicha(-1 * numero);
-                new Thread(tablero).start();
-                mencionar = ver.getUsuario().getNombre() + " bajara a la cola de la serpiente";
+                if (verSerpiente.getCola() != null) {
+                    int numero = verSerpiente.getCola().getId() - verSerpiente.getId();
+                    System.out.println("verSerpiente.getCola().getId()>>>>"+verSerpiente.getCola().getId());
+                    System.out.println("verSerpiente.getId()>>>>"+verSerpiente.getId());
+                    tablero.setPasosMoverFicha(numero);
+                    new Thread(tablero).start();
+                    mencionar = ver.getUsuario().getNombre() + "regresaras a la cola";
+                } else {
+                    mencionar = ver.getUsuario().getNombre() + "solo es una cola";
+                }
                 break;
             case 2:// CASILLA RetrocederCasilla 
                 RetrocederCasilla verRetrocederCasilla = (RetrocederCasilla) ficha.getUbicacion();
@@ -66,10 +72,17 @@ public class ReglaJuegoSS {
                 break;
             case 5:// CASILLA Escalera
                 Escalera verEscalera = (Escalera) ficha.getUbicacion();
-                int numeroDos = verEscalera.getSubir().getId() - verEscalera.getId();
-                tablero.setPasosMoverFicha(numeroDos);
-                new Thread(tablero).start();
-                mencionar = ver.getUsuario().getNombre() + " subira";
+                if (verEscalera.getSubir() != null) {
+                    int numeroDos = verEscalera.getSubir().getId() - verEscalera.getId();
+                    System.out.println("verEscalera.getSubir().getId()>>>>><"+verEscalera.getSubir().getId());
+                    System.out.println("verEscalera.getId()"+verEscalera.getId());
+                    System.out.println("numeroDos"+numeroDos);
+                    tablero.setPasosMoverFicha(numeroDos);
+                    new Thread(tablero).start();
+                    mencionar = ver.getUsuario().getNombre() + "subira";
+                } else {
+                    mencionar = ver.getUsuario().getNombre() + "solo es la cima";
+                }
                 break;
             case 6:// CASILLA AvanzarMas
                 AvanzarMas verAvanzarMas = (AvanzarMas) ficha.getUbicacion();

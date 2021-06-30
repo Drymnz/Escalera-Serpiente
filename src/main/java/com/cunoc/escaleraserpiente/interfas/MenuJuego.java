@@ -294,7 +294,9 @@ public class MenuJuego extends javax.swing.JPanel {
                 } while (!(ver.canRead()) || !ver.getName().endsWith("txt"));
                 Tablero nuevo = (new ManejoCargaPartida(ver)).getTerminado();
                 PantallaDelJuego nuevaPartidaCon = new PantallaDelJuego(nuevo.getFila(), nuevo.getColumna(), listadoJugadores, contadorJugadores, nuevo);
+                nuevaPartidaCon.cargarTablero();
                 Start.ejecutar.jugar(nuevaPartidaCon);
+                nuevaPartidaCon.cargarTablero();
             } else {
                 Start.ejecutar.jugar(nuevaPartida);
 

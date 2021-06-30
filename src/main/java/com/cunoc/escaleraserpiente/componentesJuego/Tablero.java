@@ -12,6 +12,7 @@ import com.cunoc.escaleraserpiente.casillasEspeciales.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Label;
 import java.io.File;
 import javax.swing.JOptionPane;
 
@@ -55,10 +56,14 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     //final  Creates new form Tablero
 
     public void cargar() {
+        this.removeAll();
         this.setLayout(new GridLayout(fila, columna));
-        for (int i = 0; i < listado.length; i++) {
+        int inicar = fila * columna;
+        inicar--;
+        for (int i = inicar; i != -1; i--) {
             this.add(listado[i]);
         }
+        repaint();
     }
 
     @Override
@@ -72,7 +77,6 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
         this.fila = fila;
         this.columna = columna;
         this.listado = new Casilla[columna * fila];
-
         listado[listado.length - 1] = new Casilla((fila * columna), null, new Color(234, 190, 63));// casilla victoria
         this.add(listado[listado.length - 1]);
         for (int i = (listado.length - 2); i >= 0; i--) {
@@ -158,7 +162,7 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
     private void gano() {
         for (int i = 0; i < listado.length; i++) {
             if (listado[i].getFicha().getUsuario() == ganadorUsuario) {
-                JOptionPane.showMessageDialog(null, "GAno>>>> "+ganadorUsuario.getId()+" Nombre >>>"+ganadorUsuario.getNombre());
+                JOptionPane.showMessageDialog(null, "GAno>>>> " + ganadorUsuario.getId() + " Nombre >>>" + ganadorUsuario.getNombre());
                 listado[i].getFicha().getUsuario().setVictoria(listado[i].getFicha().getUsuario().getVictoria() + 1);
             } else {
                 listado[i].getFicha().getUsuario().setPerdida(listado[i].getFicha().getUsuario().getPerdida() + 1);
@@ -197,8 +201,8 @@ public class Tablero extends javax.swing.JPanel implements Runnable {
             if (fichaEnMovimiento.getUbicacion() == null || (fichaEnMovimiento.getUbicacion() != null && fichaEnMovimiento.getUbicacion().getId() > 0 && fichaEnMovimiento.getUbicacion().getId() < ((fila * columna) + 1))) {
                 moverFicha();
                 if (fichaEnMovimiento.getUbicacion().getId() >= ((fila * columna))) {
-                gano();
-            }
+                    gano();
+                }
             }
         }
     }

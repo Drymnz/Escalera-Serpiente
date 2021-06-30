@@ -69,7 +69,6 @@ public class ManejoCargaPartida {
         tableroFinal = new Tablero(listado, fila, columna, null, 0, Color.gray, null);
         int contador = tableroFinal.getFila() * tableroFinal.getColumna();
         listado = new Casilla[contador];
-        
         for (int i = 0; i < fila; i++) {
             for (int j = 0; j < columna; j++) {
                 if (casillas[i][j] == null) {
@@ -77,6 +76,7 @@ public class ManejoCargaPartida {
                 } else {
                     listado[contador-1] = casillas[i][j];
                 }
+                   
                 contador--;
             }
         }

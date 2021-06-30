@@ -11,7 +11,9 @@ import com.cunoc.escaleraserpiente.Usuario.Usuario;
 import com.cunoc.escaleraserpiente.guardarPartidaCargar.ManejoGuardarPartida;
 import java.awt.Color;
 import java.io.File;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -40,25 +42,28 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         this.fila = fila;
         this.columna = columna;
         jugadores(listado);
-        tabla();
+        tablero1.botones(fila, columna);
+        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
+
     }
 
     public PantallaDelJuego(int fila, int columna, Usuario[] listado, int CantidadDeJugadores, Tablero tablero) {
-        this.tablero1 = tablero;
         initComponents();
+        this.tablero1 = tablero;
+        this.tablero1 = tablero;
+        this.tablero1 = tablero;
+        this.tablero1 = tablero;
         this.CantidadDeJugadores = CantidadDeJugadores;
+        this.columna = columna;
+        this.fila = fila;
+
+        jugadores(listado);
+        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
+
         turnoAcutal.setDado(dado);
         hiloCronometro = new Thread(cronometro1);
         hiloCronometro.start();
-        this.fila = fila;
-        this.columna = columna;
-        jugadores(listado);
-        tabla();
-    }
 
-    public void tabla() {
-        tablero1.botones(fila, columna);
-        reglas = new ReglaJuegoSS(listadoFichas, tablero1, CantidadDeJugadores, turno);
     }
 
     private void jugadores(Usuario[] Revisar) {
@@ -66,12 +71,17 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             listado = new Usuario[CantidadDeJugadores];
             for (int i = 0; i < Revisar.length; i++) {
                 if (Revisar[i] != null) {
-
                     listado[i] = Revisar[i];
                 }
             }
             asignarTurnos();
         }
+    }
+
+    public void cargarTablero() {
+        tablero1.removeAll();
+        tablero1.cargar();
+        this.repaint();
     }
 
     private void asignarTurnos() {
@@ -124,7 +134,6 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tablero1 = new com.cunoc.escaleraserpiente.componentesJuego.Tablero();
         jPanel1 = new javax.swing.JPanel();
         dado = new com.cunoc.escaleraserpiente.componentesJuego.Dado();
         JButtonLanzar = new javax.swing.JButton();
@@ -136,17 +145,8 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
         cronometro1 = new com.cunoc.escaleraserpiente.Cronometro.Cronometro();
         jButton1 = new javax.swing.JButton();
         Registro = new javax.swing.JLabel();
-
-        javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
-        tablero1.setLayout(tablero1Layout);
-        tablero1Layout.setHorizontalGroup(
-            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1002, Short.MAX_VALUE)
-        );
-        tablero1Layout.setVerticalGroup(
-            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 696, Short.MAX_VALUE)
-        );
+        JPanelTablero = new javax.swing.JPanel();
+        tablero1 = new com.cunoc.escaleraserpiente.componentesJuego.Tablero();
 
         jPanel1.setBackground(new java.awt.Color(177, 193, 118));
 
@@ -266,9 +266,39 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
                         .addComponent(JButtonLanzar)))
                 .addGap(18, 18, 18)
                 .addComponent(Registro, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addContainerGap())
+        );
+
+        JPanelTablero.setBackground(new java.awt.Color(174, 74, 180));
+
+        tablero1.setBackground(new java.awt.Color(149, 237, 44));
+
+        javax.swing.GroupLayout tablero1Layout = new javax.swing.GroupLayout(tablero1);
+        tablero1.setLayout(tablero1Layout);
+        tablero1Layout.setHorizontalGroup(
+            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 713, Short.MAX_VALUE)
+        );
+        tablero1Layout.setVerticalGroup(
+            tablero1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 391, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout JPanelTableroLayout = new javax.swing.GroupLayout(JPanelTablero);
+        JPanelTablero.setLayout(JPanelTableroLayout);
+        JPanelTableroLayout.setHorizontalGroup(
+            JPanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1008, Short.MAX_VALUE)
+            .addGroup(JPanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tablero1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        JPanelTableroLayout.setVerticalGroup(
+            JPanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(JPanelTableroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tablero1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -277,17 +307,17 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(JPanelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tablero1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(JPanelTablero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -311,6 +341,7 @@ public class PantallaDelJuego extends javax.swing.JPanel implements Runnable {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JButtonLanzar;
+    private javax.swing.JPanel JPanelTablero;
     private javax.swing.JTable JTableLIstadoJugadores;
     private javax.swing.JLabel Registro;
     private com.cunoc.escaleraserpiente.Cronometro.Cronometro cronometro1;
